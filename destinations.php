@@ -42,7 +42,7 @@ include("config.php");
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['destination_name']; ?></h5>
             <p class="card-text"><?php echo substr($row['description'], 0, 100); ?>...</p>
-            <a href="#" class="btn btn-primary"> Explore </a>
+            <a href="#" class="btn btn-primary"> View Packages </a>
           </div>
         </div>
       </div>

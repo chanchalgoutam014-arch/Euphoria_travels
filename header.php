@@ -45,22 +45,7 @@
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="index.php">Home</a></li>
-					<li class="has-children">
-						<a href="#">Dropdown</a>
-						<ul class="dropdown">
-							<li><a href="elements.php">Elements</a></li>
-							<li><a href="#">Menu One</a></li>
-							<li class="has-children">
-								<a href="#">Menu Two</a>
-								<ul class="dropdown">
-									<li><a href="#">Sub Menu One</a></li>
-									<li><a href="#">Sub Menu Two</a></li>
-									<li><a href="#">Sub Menu Three</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Menu Three</a></li>
-						</ul>
-					</li>
+					<li><a href="destinations.php">Destinations</a></li>
 					<li><a href="services.php">Services</a></li>
 					<li><a href="about.php">About</a></li>
 					<li><a href="contact.php">Contact Us</a></li>
