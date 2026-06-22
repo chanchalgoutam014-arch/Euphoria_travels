@@ -26,7 +26,7 @@ $result = mysqli_query($db, $query);
             <th>Image</th>
             <th>Name</th>
             <th>Category</th>
-            <th>Actions</th>
+            <th colspan="2" class="text-center">Actions</th>
         </tr>
         <?php
         $no = 1;
@@ -46,6 +46,10 @@ $result = mysqli_query($db, $query);
 
                 <td>
                     <button type="button" class="btn btn-outline-danger"><a href="?delete_id=<?php echo $row['ID']; ?>">Delete</a></button>
+                </td>
+
+                 <td>
+                    <button type="button" class="btn btn-outline-primary"><a href="edit_destination.php?ID=<?php echo $row['ID']; ?>">Edit</a></button>
                 </td>
 
             </tr>

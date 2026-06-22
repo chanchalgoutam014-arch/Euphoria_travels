@@ -45,10 +45,10 @@
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="index.php">Home</a></li>
-					<li><a href="destinations.php">Destinations</a></li>
-					<li><a href="services.php">Services</a></li>
-					<li><a href="about.php">About</a></li>
-					<li><a href="contact.php">Contact Us</a></li>
+					<li class="active"><a href="destinations.php">Destinations</a></li>
+					<li class="active"><a href="services.php">Services</a></li>
+					<li class="active"><a href="about.php">About</a></li>
+					<li class="active"><a href="contact.php">Contact Us</a></li>
 				</ul>
 
 				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
