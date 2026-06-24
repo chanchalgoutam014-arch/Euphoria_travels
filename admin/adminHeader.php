@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -44,11 +45,25 @@
 				<a href="index.html" class="logo m-0">Euphoria Travels<span class="text-primary">.</span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-					<li class="active"><a href="index.php">Home</a></li>
-					<li class="active"><a href="destinations.php">Destinations</a></li>
-					<li class="active"><a href="services.php">Services</a></li>
-					<li class="active"><a href="about.php">About</a></li>
-					<li class="active"><a href="contact.php">Contact Us</a></li>
+					<li class="active"><a href="./admin_dashboard.php">Dashboarde</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Destination
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Add new destination</a>
+							<a class="dropdown-item" href="#">Manage destination</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Packages
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Add new packages</a>
+							<a class="dropdown-item" href="#">Mange Packages</a>
+						</div>
+					</li>
 				</ul>
 
 				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
@@ -57,4 +72,4 @@
 
 			</div>
 		</div>
-</nav>
+	</nav>

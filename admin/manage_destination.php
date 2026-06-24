@@ -1,7 +1,7 @@
 <?php
 
 include("header.php");
-include("config.php");
+include("./config.php");
 
 if (isset($_GET["delete_id"])) {
     $id = $_GET["delete_id"];

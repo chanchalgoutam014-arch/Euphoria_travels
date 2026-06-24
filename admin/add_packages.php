@@ -1,7 +1,7 @@
 <?php
 
 include("header.php");
-include("config.php");
+include("./config.php");
 
 if (isset($_POST['submit'])) {
     $destination_id = $_POST['destination_id'];

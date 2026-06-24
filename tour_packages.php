@@ -2,58 +2,48 @@
 include("header.php");
 include("config.php");
 
-
-$id = $_GET["ID"];
-$query = "SELECT * FROM tour_package WHERE ID=$id";
+$query = "SELECT * FROM tour_package";
 $result = mysqli_query($db, $query);
+
+
+while ($row = mysqli_fetch_assoc($result)) {
 ?>
-<div class="container py-5">
 
-    <h2 class="text-center mb-5">
-        Available Packages
-    </h2>
+    <div class="container py-5">
+        <div class="row g-4">
 
-    <div class="row">
+            <!-- Package Card -->
+            <div class="col-lg-4">
+                <div class="card h-100 shadow-lg border-0 rounded-4">
 
-        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <div class="card-body d-flex flex-column">
 
-            <div class="col-md-4 mb-4">
+                        <!-- Image -->
+                        <img src="package_image/<?php echo $row['image']; ?>" class="img-fluid rounded-4 mb-3" alt="Package Image">
 
-                <div class="card shadow h-100">
+                        <!-- Package Name -->
+                        <h3 class="fw-bold"><?php echo $row['package_name']; ?></h3>
 
-                    <img src="package_image/<?php echo $row['image']; ?>" class="card-img-top" style="height:280px; object-fit:cover;">
+                        <!-- Price -->
+                        <h4 class="fw-bold text-primary">₹<?php echo $row['price']; ?></h4>
 
-                    <div class="card-body">
+                        <!-- Duration -->
+                        <p class="text-muted"><?php echo $row['duration']; ?></p>
 
-                        <h5><?php echo $row['package_name']; ?></h5>
+                        <!-- Description -->
+                        <p><?php echo $row['description']; ?></p>
 
-                        <p>
-                            <?php echo substr($row['description'], 0, 100); ?>...
-                        </p>
-
-                        <p>
-                            <strong>Duration:</strong>
-                            <?php echo $row['duration']; ?>
-                        </p>
-
-                        <p>
-                            <strong>₹<?php echo $row['price']; ?></strong>
-                        </p>
-
-                        <a href="package_details.php?ID=<?php echo $row['ID']; ?>" class="btn btn-primary">
-                            View Details
-                        </a>
+                        <!-- Button -->
+                        <div class="mt-auto">
+                            <a href="#" class="btn btn-primary w-100 rounded-pill">
+                                View Details
+                            </a>
+                        </div>
 
                     </div>
-
+                <?php } ?>
                 </div>
-
             </div>
 
-        <?php } ?>
 
-    </div>
-
-</div>
-
-<?php include("footer.php"); ?>
+            <?php include("footer.php"); ?>
