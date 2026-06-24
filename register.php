@@ -1,34 +1,31 @@
 <?php
 
-        include("header.php");
-        include("config.php");
+include("header.php");
+include("config.php");
 
-        if(isset($_POST["register_btn"])){
+if (isset($_POST["register_btn"])) {
 
-        $F_name=$_POST["F_name"];
-        $L_name=$_POST["L_name"];
-        $email=$_POST["email"];
-        $password=md5($_POST["password"]);
-        $contact=$_POST["contact"];
-        $address=$_POST["address"];
+    $F_name = $_POST["F_name"];
+    $L_name = $_POST["L_name"];
+    $email = $_POST["email"];
+    $password = md5($_POST["password"]);
+    $contact = $_POST["contact"];
+    $address = $_POST["address"];
 
-        $query= "INSERT INTO `user`(`F_name`, `L_name`, `email`, `password`, `contact`, `address`) VALUES ('$F_name','$L_name','$email','$password','$contact','$address')";
+    $query = "INSERT INTO `user`(`F_name`, `L_name`, `email`, `password`, `contact`, `address`) VALUES ('$F_name','$L_name','$email','$password','$contact','$address')";
 
-        $result=mysqli_query($db,$query);
+    $result = mysqli_query($db, $query);
 
-        if($result){
+    if ($result) {
 
-        echo("added successfully");
+        echo ("added successfully");
+    } else {
 
-        }
-        else{
-
-        echo("not added");
-
-        }
+        echo ("not added");
     }
+}
 
-?>  
+?>
 
 <div class="hero hero-inner">
     <div class="container">
@@ -63,30 +60,30 @@
                             </div>
                         </div>
                     </div>
-                        <div class="form-group">
-                            <label class="text-black" for="email">Email address</label>
-                            <input name="email" type="email" class="form-control" id="email">
-                        </div>
-                       <div class="form-group">
-    <label class="text-black">Password</label>
-    <input name="password" type="password" class="form-control">
-</div>
+                    <div class="form-group">
+                        <label class="text-black" for="email">Email address</label>
+                        <input name="email" type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black">Password</label>
+                        <input name="password" type="password" class="form-control">
+                    </div>
 
-<div class="form-group">
-    <label class="text-black">Contact</label>
-    <input name="contact" type="number" class="form-control">
-</div>
+                    <div class="form-group">
+                        <label class="text-black">Contact</label>
+                        <input name="contact" type="number" class="form-control">
+                    </div>
 
-<div class="form-group">
-    <label class="text-black">Address</label>
-    <textarea name="address" class="form-control" cols="30" rows="5"></textarea>
-</div>
+                    <div class="form-group">
+                        <label class="text-black">Address</label>
+                        <textarea name="address" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
 
-<div class="text-center mt-3">
-    <button name="register_btn" type="submit" class="btn btn-primary">
-        Register
-    </button>
-</div>
+                    <div class="text-center mt-3">
+                        <button name="register_btn" type="submit" class="btn btn-primary">
+                            Register
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
