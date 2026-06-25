@@ -60,8 +60,8 @@
 							Packages
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Add new packages</a>
-							<a class="dropdown-item" href="#">Mange Packages</a>
+							<a class="dropdown-item" href="./add_packages.php">Add new packages</a>
+							<a class="dropdown-item" href="./manage_packages.php">Mange Packages</a>
 						</div>
 					</li>
 				</ul>
