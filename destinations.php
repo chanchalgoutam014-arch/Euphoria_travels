@@ -7,7 +7,7 @@ include("config.php");
 <div class="position-relative text-white overflow-hidden" style="height:500px;">
 
     <!-- Background Image -->
-    <img src="images/bg-image.jpg"; class="position-absolute top-0 start-0 w-100 h-100";  style="object-fit:cover; filter:blur(2px);">
+    <img src="images/bg-image.jpg"; class="position-absolute top-0 start-0 w-100 h-200"  style="object-fit:cover; filter:blur(2px);">
 
     <!-- Dark Overlay -->
     <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
@@ -51,7 +51,7 @@ include("config.php");
 
       <div class="col-md-4 mt-5 mb-5">
         <div class="card text-center shadow">
-          <img src="destination_image/<?php echo $row['image']; ?>" class="card-img-top" style="height:280px; object-fit:cover;">
+          <img src="/admin/destination_image/<?php echo $row['image']; ?>" class="card-img-top" style="height:280px; object-fit:cover;">
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['destination_name']; ?></h5>
             <p class="card-text"><?php echo $row['description']; ?>...</p>

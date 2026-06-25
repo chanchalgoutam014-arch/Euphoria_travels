@@ -1,7 +1,7 @@
 <?php
 
-include("header.php");
-include("./config.php");
+include("adminHeader.php");
+include("../config.php");
 
 
 $id = $_GET["ID"];
@@ -98,6 +98,8 @@ if (isset($_POST["Update"])) {
 
 </div>
 
-<?php
-include("footer.php");
+<?php 
+
+include("adminFooter.php");
+
 ?>

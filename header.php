@@ -46,6 +46,7 @@
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="index.php">Home</a></li>
 					<li class="active"><a href="destinations.php">Destinations</a></li>
+					<li class="active"><a href="tour_packages.php">Packages</a></li>
 					<li class="active"><a href="services.php">Services</a></li>
 					<li class="active"><a href="about.php">About</a></li>
 					<li class="active"><a href="contact.php">Contact Us</a></li>

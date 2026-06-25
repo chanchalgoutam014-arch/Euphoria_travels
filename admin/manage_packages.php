@@ -39,7 +39,7 @@ $result = mysqli_query($db, $query);
                 <td><?php echo $no ?></td>
 
                 <td>
-                    <img src="./../package_image/<?php echo $row['image']; ?>" width="100">
+                    <img src="./package_image/<?php echo $row['image']; ?>" width="200">
                 </td>
 
                 <td><?php echo $row['package_name']; ?></td>
@@ -66,3 +66,9 @@ $result = mysqli_query($db, $query);
     </table>
 
 </div>
+
+<?php 
+
+include("adminFooter.php");
+
+?>

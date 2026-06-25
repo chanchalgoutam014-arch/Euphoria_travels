@@ -1,11 +1,11 @@
 <?php
 
-include("admin/adminHeader.php");
+include("adminHeader.php");
 
 ?>
 
 <?php
 
-include("admin/adminFooter.php");
+include("adminFooter.php");
 
 ?>

@@ -21,7 +21,7 @@ if (isset($_POST["add_destination"])) {
 
   if ($result) {
 
-    move_uploaded_file($tmp_name, "destination_image/" . $new_name);
+    move_uploaded_file($tmp_name, "/admin/destination_image/" . $new_name);
 
     echo "<script>window.location.assign('destinations.php?msg=addedsucessfully')</script>";
   } else {
@@ -95,6 +95,8 @@ if (isset($_POST["add_destination"])) {
 
 </div>
 
-<?php
-include("footer.php");
+<?php 
+
+include("adminFooter.php");
+
 ?>
