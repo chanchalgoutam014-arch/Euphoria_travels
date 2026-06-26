@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+if(!isset($_SESSION["email"])){
+              echo"<script>window.location.assign('../adminLogin.php?msg=Login First')</script>";
+
+            }
+?>
 <!doctype html>
 <html lang="en">
 
@@ -53,7 +61,7 @@
 							Destination
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="./edit_destination.php">Add new destination</a>
+							<a class="dropdown-item" href="./addDestinations.php">Add new destination</a>
 							<a class="dropdown-item" href="./manage_destination.php">Manage destination</a>
 						</div>
 					</li>

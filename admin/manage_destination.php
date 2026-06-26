@@ -3,8 +3,6 @@
 include("adminHeader.php");
 include("../config.php");
 
-$id=$_GET("ID");
-
 if (isset($_GET["delete_id"])) {
     $id = $_GET["delete_id"];
     $delete_query = "DELETE FROM `destinations` WHERE ID = $id";

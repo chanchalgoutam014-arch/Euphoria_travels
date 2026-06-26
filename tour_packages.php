@@ -9,6 +9,18 @@ $result = mysqli_query($db, $query);
 while ($row = mysqli_fetch_assoc($result)) {
 ?>
 
+<div class="hero hero-inner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="intro-wrap">
+                    <h1 class="mb-0">Available Packages</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="container py-5">
         <div class="row g-4">
 

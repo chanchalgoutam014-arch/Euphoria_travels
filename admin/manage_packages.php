@@ -65,7 +65,7 @@ $result = mysqli_query($db, $query);
                 </td>
 
                  <td>
-                    <button type="button" class="btn btn-outline-primary"><a href="edit_destination.php?ID=<?php echo $row['ID']; ?>">Edit</a></button>
+                    <button type="button" class="btn btn-outline-primary"><a href="edit_package.php?ID=<?php echo $row['ID']; ?>">Edit</a></button>
                 </td>
 
             </tr>

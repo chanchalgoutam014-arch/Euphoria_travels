@@ -2,9 +2,6 @@
 include("header.php");
 include("config.php");
 
-// if (!isset($_GET['ID'])) {
-//     die("Destination not found");
-// }
 
 $destination_id = $_GET['ID'];
 

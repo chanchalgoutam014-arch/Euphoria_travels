@@ -3,31 +3,24 @@
 include("adminHeader.php");
 include("../config.php");
 
+if (isset($_POST['add_destination'])) {
+    
+    $destination_name = $_POST['destination_name'];
+    $description = $_POST['description'];
+    $category = $_POST['category'];
 
-if (isset($_POST["add_destination"])) {
+    $image = $_FILES['image']['name'];
+    $tmp_name = $_FILES['image']['tmp_name'];
 
+    move_uploaded_file($tmp_name, "package_image/" . $image);
 
+    $query = "INSERT INTO destinations( destination_name, image, description, category) VALUES ('$destination_name','$image','$description','$category')";
 
-  $destination_name = $_POST["destination_name"];
-  $image = $_FILES["image"]["name"];
-  $tmp_name = $_FILES["image"]["tmp_name"];
-  $new_name = rand() . $image;
-  $description = $_POST["description"];
-  $category = $_POST["Category"];
+    mysqli_query($db, $query);
 
-  $query = "INSERT INTO `destinations`(`destination_name`,`image`,`description`,`category`) VALUES ('$destination_name','$new_name','$description','$category')";
-
-  $result = mysqli_query($db, $query);
-
-  if ($result) {
-
-    move_uploaded_file($tmp_name, "/admin/destination_image/" . $new_name);
-
-    echo "<script>window.location.assign('destinations.php?msg=addedsucessfully')</script>";
-  } else {
-    echo ("not added");
-  }
+    echo "<script>alert('Package Added Successfully');</script>";
 }
+
 ?>
 <!-- Hero Section -->
 <div class="hero hero-inner">

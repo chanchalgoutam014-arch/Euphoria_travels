@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,6 +51,14 @@
 					<li class="active"><a href="services.php">Services</a></li>
 					<li class="active"><a href="about.php">About</a></li>
 					<li class="active"><a href="contact.php">Contact Us</a></li>
+					<?php
+					if (isset($_SESSION["email"])) {
+						echo "<li><a href='logout.php'>Logout</a></li>";
+					} else {
+						echo "<li><a href='login.php'>Login</a></li>";
+						echo "<li><a href='adminLogin.php'>Admin Login</a></li>";
+					}
+					?>
 				</ul>
 
 				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
@@ -58,4 +67,4 @@
 
 			</div>
 		</div>
-</nav>
+	</nav>
