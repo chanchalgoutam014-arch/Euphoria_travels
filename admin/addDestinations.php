@@ -36,9 +36,6 @@ if (isset($_POST["add_destination"])) {
       <div class="col-lg-6 mx-auto text-center">
         <div class="intro-wrap">
           <h1 class="mb-0">Add New Destinations</h1>
-          <p class="text-white">
-            Discover breathtaking domestic and international destinations for your next unforgettable journey.
-          </p>
         </div>
       </div>
     </div>

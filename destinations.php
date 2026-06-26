@@ -4,34 +4,16 @@ include("header.php");
 include("config.php");
 
 ?>
-<div class="position-relative text-white overflow-hidden" style="height:500px;">
-
-    <!-- Background Image -->
-    <img src="images/bg-image.jpg"; class="position-absolute top-0 start-0 w-100 h-200"  style="object-fit:cover; filter:blur(2px);">
-
-    <!-- Dark Overlay -->
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-
-    <!-- Content -->
-    <div class="position-relative h-100 d-flex align-items-center justify-content-center">
-        <div class="text-center">
-
-            <span class="badge bg-warning text-dark mb-3">
-                ✈ Explore The World
-            </span>
-
-            <h1 class="display-3 fw-bold mb-3">
-                Discover Amazing Destinations
-            </h1>
-
-            <p class="lead">
-                Discover breathtaking domestic and international destinations
-                for your next unforgettable journey.
-            </p>
-
+<div class="hero hero-inner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="intro-wrap">
+                    <h1 class="mb-0">Destinations</h1>
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
 <!-- Domestic Destinations -->
 <div class="container py-2">

@@ -53,8 +53,8 @@
 							Destination
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Add new destination</a>
-							<a class="dropdown-item" href="#">Manage destination</a>
+							<a class="dropdown-item" href="./edit_destination.php">Add new destination</a>
+							<a class="dropdown-item" href="./manage_destination.php">Manage destination</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">

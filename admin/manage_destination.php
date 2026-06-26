@@ -3,6 +3,8 @@
 include("adminHeader.php");
 include("../config.php");
 
+$id=$_GET("ID");
+
 if (isset($_GET["delete_id"])) {
     $id = $_GET["delete_id"];
     $delete_query = "DELETE FROM `destinations` WHERE ID = $id";
@@ -15,9 +17,18 @@ $result = mysqli_query($db, $query);
 
 
 ?>
+<div class="hero hero-inner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="intro-wrap">
+                    <h1 class="mb-0">Manage Destinations</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container mt-5">
-
-    <h2 class="mb-4">Manage Destinations</h2>
 
     <table class="table table-bordered table-striped">
 
