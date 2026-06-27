@@ -14,11 +14,21 @@ $destination = mysqli_fetch_assoc($destination_result);
 $package_query = "SELECT * FROM tour_package WHERE destination_id='$destination_id'";
 $package_result = mysqli_query($db, $package_query);
 ?>
-
+<div class="hero hero-inner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="intro-wrap">
+                    <h1 class="mb-0"> <?php echo $destination['destination_name']; ?></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container py-5">
 
     <h2 class="text-center mb-4">
-        <?php echo $destination['destination_name']; ?> Packages
+        Packages
     </h2>
 
     <div class="row">

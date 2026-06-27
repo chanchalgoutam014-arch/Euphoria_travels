@@ -6,24 +6,25 @@ $query = "SELECT * FROM tour_package";
 $result = mysqli_query($db, $query);
 
 
-while ($row = mysqli_fetch_assoc($result)) {
+
 ?>
 
-    <div class="hero hero-inner">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mx-auto text-center">
-                    <div class="intro-wrap">
-                        <h1 class="mb-0">Available Packages</h1>
-                    </div>
+<div class="hero hero-inner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="intro-wrap">
+                    <h1 class="mb-0">Available Package</h1>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="container py-5">
-        <div class="row g-4">
-
+</div>
+<div class="container py-5">
+    <div class="row g-4">
+        <?php
+        while ($row = mysqli_fetch_assoc($result)) {
+        ?>
             <!-- Package Card -->
             <div class="col-lg-4">
                 <div class="card h-100 shadow-lg border-0 rounded-4">
@@ -53,7 +54,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <?php } ?>
                 </div>
             </div>
-
+    </div>
+</div>
 
 <?php
 include("footer.php");
