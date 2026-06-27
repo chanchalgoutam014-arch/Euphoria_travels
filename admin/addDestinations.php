@@ -11,7 +11,7 @@ if (isset($_POST['add_destination'])) {
     $image = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
 
-    move_uploaded_file($tmp_name, "destination_image/" . $image);
+    move_uploaded_file($tmp_name, "../destination_image/" . $image);
 
     $query = "INSERT INTO destinations( destination_name, image, description, category) VALUES ('$destination_name','$image','$description','$category')";
 

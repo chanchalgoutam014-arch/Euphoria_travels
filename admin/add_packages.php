@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $image = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
 
-    move_uploaded_file($tmp_name, "/admin/package_image/" . $image);
+    move_uploaded_file($tmp_name, "../package_image/" . $image);
 
     $query = "INSERT INTO tour_package(destination_id, package_name, image, description, duration, price) VALUES ('$destination_id','$package_name','$image','$description','$duration','$price')";
 
