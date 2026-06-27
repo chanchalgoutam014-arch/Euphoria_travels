@@ -1,6 +1,5 @@
 <?php
-
-include("./admin/adminHeader.php");
+include("header.php");
 include("config.php");
 
 if (isset($_POST["login_btn"])) {
@@ -19,7 +18,7 @@ if (isset($_POST["login_btn"])) {
     $_SESSION["user_ID"] = $row['ID'];
     $_SESSION["email"] = $row['email'];
       
-     echo "<script>window.location.assign('admin_dashboard.php?msg=login sucessfully')</script>";
+     echo "<script>window.location.assign('admin/admin_dashboard.php?msg=login successfully')</script>";
     
     } else {
 
@@ -41,34 +40,37 @@ if (isset($_POST["login_btn"])) {
     </div>
 </div>
 
-
 <div class="untree_co-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <form method="POST" class="contact-form" data-aos="fade-up" data-aos-delay="200">
-                    <div class="row">
-                        <div class="col-12">
-                           <div class="form-group">
+
+                <form method="POST" class="contact-form">
+
+                    <div class="form-group mb-3">
                         <label class="text-black" for="email">Email address</label>
                         <input name="email" type="email" class="form-control" id="email">
                     </div>
-                    <div class="form-group">
+
+                    <div class="form-group mb-3">
                         <label class="text-black">Password</label>
                         <input name="password" type="password" class="form-control">
                     </div>
-                    <div class="text-center mt-3">
-                        <button name="login_btn" type="submit" class="btn btn-primary mb-5">
+
+                    <div class="text-center">
+                        <button name="login_btn" type="submit" class="btn btn-primary">
                             Login
                         </button>
                     </div>
+
                 </form>
+
             </div>
         </div>
     </div>
 </div>
 <?php
 
-include("adminFooter.php");
+include("admin/adminFooter.php");
 
 ?>

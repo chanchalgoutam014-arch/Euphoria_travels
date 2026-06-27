@@ -33,7 +33,7 @@ include("config.php");
 
       <div class="col-md-4 mt-5 mb-5">
         <div class="card text-center shadow">
-          <img src="/admin/destination_image/<?php echo $row['image']; ?>" class="card-img-top" style="height:280px; object-fit:cover;">
+          <img src="admin/destination_image/<?php echo $row['image']; ?>" class="card-img-top" style="height:280px; object-fit:cover;">
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['destination_name']; ?></h5>
             <p class="card-text"><?php echo $row['description']; ?>...</p>

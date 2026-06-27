@@ -9,17 +9,17 @@ $result = mysqli_query($db, $query);
 while ($row = mysqli_fetch_assoc($result)) {
 ?>
 
-<div class="hero hero-inner">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mx-auto text-center">
-                <div class="intro-wrap">
-                    <h1 class="mb-0">Available Packages</h1>
+    <div class="hero hero-inner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mx-auto text-center">
+                    <div class="intro-wrap">
+                        <h1 class="mb-0">Available Packages</h1>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <div class="container py-5">
         <div class="row g-4">
@@ -46,11 +46,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <p><?php echo $row['description']; ?></p>
 
                         <!-- Button -->
-                        <div class="mt-auto">
-                            <a href="#" class="btn btn-primary w-100 rounded-pill">
-                                View Details
-                            </a>
-                        </div>
+                        <a href="booking.php?ID=<?php echo $row['ID']; ?>" class="btn btn-primary">Book Now</a>
+
 
                     </div>
                 <?php } ?>
@@ -58,4 +55,6 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
 
 
-            <?php include("footer.php"); ?>
+<?php
+include("footer.php");
+?>

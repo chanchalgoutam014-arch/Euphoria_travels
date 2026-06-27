@@ -8,11 +8,10 @@ if (isset($_POST['add_destination'])) {
     $destination_name = $_POST['destination_name'];
     $description = $_POST['description'];
     $category = $_POST['category'];
-
     $image = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
 
-    move_uploaded_file($tmp_name, "package_image/" . $image);
+    move_uploaded_file($tmp_name, "destination_image/" . $image);
 
     $query = "INSERT INTO destinations( destination_name, image, description, category) VALUES ('$destination_name','$image','$description','$category')";
 
@@ -67,7 +66,7 @@ if (isset($_POST['add_destination'])) {
 
         <div class="mb-3">
           <label>Category</label>
-          <select name="Category" class="form-control">
+          <select name="category" class="form-control">
             <option value="">Select Category</option>
             <option value="Domestic">Domestic</option>
             <option value="International">International</option>

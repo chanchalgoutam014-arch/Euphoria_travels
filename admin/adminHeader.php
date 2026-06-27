@@ -1,10 +1,10 @@
 <?php
-
 session_start();
-if(!isset($_SESSION["email"])){
-              echo"<script>window.location.assign('../adminLogin.php?msg=Login First')</script>";
 
-            }
+if (!isset($_SESSION["email"])) {
+    header("Location: ../adminLogin.php?msg=Login First");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="en">
