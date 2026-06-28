@@ -3,20 +3,26 @@
 include("header.php");
 
 ?>
-  <div class="hero hero-inner">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 mx-auto text-center">
-          <div class="intro-wrap">
-            <h1 class="mb-0">About Us</h1>
-            <p class="text-white">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
+<div class="position-relative" style="height:500px; overflow:hidden;">
 
-  
+
+    <img src="./images/pexels-charan-sai-437193-2874998.jpg" alt="Package Image" style="width:100%; height:100%; object-fit:cover;">
+
+    <!-- Dark Overlay -->
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45);">
+    </div>
+
+    <!-- Text -->
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; color:white;">
+
+        <p style="font-size:50px; ">
+            Your Trusted Travel Partner!
+        </p>
+
+    </div>
+
+</div>
   
   <div class="untree_co-section">
     <div class="container">

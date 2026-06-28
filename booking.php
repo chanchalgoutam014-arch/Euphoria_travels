@@ -44,16 +44,24 @@ if(isset($_POST['book_btn'])){
 }
 
 ?>
-<div class="hero hero-inner">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mx-auto text-center">
-                <div class="intro-wrap">
-                    <h1 class="mb-0">Book your destination now!</h1>
-                </div>
-            </div>
-        </div>
+<div class="position-relative" style="height:500px; overflow:hidden;">
+
+    <!-- Package Image -->
+    <img src="package_image/<?php echo $package['image']; ?>" alt="Package Image" style="width:100%; height:100%; object-fit:cover;">
+
+    <!-- Dark Overlay -->
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45);">
     </div>
+
+    <!-- Text -->
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; color:white;">
+
+        <p style="font-size:50px; ">
+            Book your destination now!
+        </p>
+
+    </div>
+
 </div>
 
 <div class="container mt-5">

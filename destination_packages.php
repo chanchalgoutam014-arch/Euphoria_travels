@@ -14,16 +14,22 @@ $destination = mysqli_fetch_assoc($destination_result);
 $package_query = "SELECT * FROM tour_package WHERE destination_id='$destination_id'";
 $package_result = mysqli_query($db, $package_query);
 ?>
-<div class="hero hero-inner">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mx-auto text-center">
-                <div class="intro-wrap">
-                    <h1 class="mb-0"> <?php echo $destination['destination_name']; ?></h1>
-                </div>
-            </div>
-        </div>
+<div class="position-relative" style="height:500px; overflow:hidden;">
+
+
+    <img src="destination_image/<?php echo $destination['image']; ?>" style="width:100%; height:100%; object-fit:cover;">
+
+    <!-- Dark Overlay -->
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45);">
     </div>
+
+    <!-- Text -->
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; color:white;">
+
+        <h1 class="mb-0" style="font-size:50px; "> <?php echo $destination['destination_name']; ?></h1>
+
+    </div>
+
 </div>
 <div class="container py-5">
 
@@ -33,7 +39,7 @@ $package_result = mysqli_query($db, $package_query);
 
     <div class="row">
 
-        <?php while($package = mysqli_fetch_assoc($package_result)) { ?>
+        <?php while ($package = mysqli_fetch_assoc($package_result)) { ?>
 
             <div class="col-md-4 mb-4">
 
@@ -48,7 +54,7 @@ $package_result = mysqli_query($db, $package_query);
                         <h5><?php echo $package['package_name']; ?></h5>
 
                         <p>
-                            <?php echo substr($package['description'],0,100); ?>...
+                            <?php echo substr($package['description'], 0, 100); ?>...
                         </p>
 
                         <p>
@@ -60,9 +66,9 @@ $package_result = mysqli_query($db, $package_query);
                             <strong>₹<?php echo $package['price']; ?></strong>
                         </p>
 
-                        <a href="package_details.php?ID=<?php echo $package['ID']; ?>"
-                           class="btn btn-primary">
-                            View Details
+                        <a href="booking.php?ID=<?php echo $package['ID']; ?>"
+                            class="btn btn-success px-4">
+                            Book Now
                         </a>
 
                     </div>

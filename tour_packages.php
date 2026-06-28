@@ -9,16 +9,24 @@ $result = mysqli_query($db, $query);
 
 ?>
 
-<div class="hero hero-inner">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mx-auto text-center">
-                <div class="intro-wrap">
-                    <h1 class="mb-0">Available Package</h1>
-                </div>
-            </div>
-        </div>
+<div class="position-relative" style="height:500px; overflow:hidden;">
+
+
+    <img src="./images/pexels-charan-sai-437193-2874998.jpg" alt="Package Image" style="width:100%; height:100%; object-fit:cover;">
+
+    <!-- Dark Overlay -->
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45);">
     </div>
+
+    <!-- Text -->
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; color:white;">
+
+        <p style="font-size:50px; ">
+            Perfect Trips, Unforgettable Memories!
+        </p>
+
+    </div>
+
 </div>
 <div class="container py-5">
     <div class="row g-4">
@@ -26,35 +34,68 @@ $result = mysqli_query($db, $query);
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
             <!-- Package Card -->
-            <div class="col-lg-4">
-                <div class="card h-100 shadow-lg border-0 rounded-4">
 
-                    <div class="card-body d-flex flex-column">
+            <div class="container my-5">
+
+                <div class="card shadow border-0 rounded-4 mx-auto" style="max-width:900px;">
+
+                    <div class="row g-0">
 
                         <!-- Image -->
-                        <img src="package_image/<?php echo $row['image']; ?>" class="img-fluid rounded-4 mb-3" alt="Package Image">
 
-                        <!-- Package Name -->
-                        <h3 class="fw-bold"><?php echo $row['package_name']; ?></h3>
+                        <div class="col-md-5">
 
-                        <!-- Price -->
-                        <h4 class="fw-bold text-primary">₹<?php echo $row['price']; ?></h4>
+                            <img src="package_image/<?php echo $row['image']; ?>"
+                                class="img-fluid h-100 w-100 rounded-start"
+                                style="height:320px; object-fit:cover;">
 
-                        <!-- Duration -->
-                        <p class="text-muted"><?php echo $row['duration']; ?></p>
+                        </div>
 
-                        <!-- Description -->
-                        <p><?php echo $row['description']; ?></p>
+                        <!-- Details -->
 
-                        <!-- Button -->
-                        <a href="booking.php?ID=<?php echo $row['ID']; ?>" class="btn btn-primary">Book Now</a>
+                        <div class="col-md-7">
 
+                            <div class="card-body p-4">
+
+                                <h2 class="fw-bold">
+                                    <?php echo $row['package_name']; ?>
+                                </h2>
+
+                                <p class="text-warning mb-2">
+                                    ★★★★★
+                                </p>
+
+                                <p class="mb-2">
+                                    📍 India
+                                </p>
+
+                                <p class="mb-2">
+                                    🕒 <?php echo $row['duration']; ?>
+                                </p>
+
+                                <h3 class="text-primary fw-bold mb-3">
+                                    ₹<?php echo $row['price']; ?>
+                                </h3>
+
+                                <a href="booking.php?ID=<?php echo $row['ID']; ?>"
+                                    class="btn btn-success px-4">
+                                    Book Now
+                                </a>
+
+                            </div>
+
+                        </div>
 
                     </div>
-                <?php } ?>
+
                 </div>
+
             </div>
     </div>
+<?php } ?>
+</div>
+</div>
+</div>
 </div>
 
 <?php
