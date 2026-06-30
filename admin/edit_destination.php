@@ -33,7 +33,7 @@ if (isset($_POST["Update"])) {
     $updatequery = "UPDATE `destinations` SET `destination_name`='$destination_name',`description`='$description' WHERE ID=$id";
   }
 
-  $result1 = mysqli_query($db, $updatequery);
+  $result = mysqli_query($db, $updatequery);
 
 
   echo "<script>window.location.assign('destinations.php?msg=editsucessfully')</script>";
