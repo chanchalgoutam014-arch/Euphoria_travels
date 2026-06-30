@@ -7,7 +7,7 @@ include("header.php");
 <div class="position-relative" style="height:500px; overflow:hidden;">
 
 
-    <img src="./images/pexels-charan-sai-437193-2874998.jpg" alt="Package Image" style="width:100%; height:100%; object-fit:cover;">
+    <img src="./images/pexels-padrinan-2882509.jpg" alt="Package Image" style="width:100%; height:100%; object-fit:cover;">
 
     <!-- Dark Overlay -->
     <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45);">
