@@ -29,7 +29,7 @@ if (isset($_POST["Update"])) {
     $new_name = rand() . $imageName;
 
     $updatequery = "UPDATE `tour_package` SET `package_name`='$package_name',`description`='$description',`image`='$new_name' WHERE ID=$id";
-    move_uploaded_file($tmp_name, "category_image/" . $new_name);
+    move_uploaded_file($tmp_name, "package_image/" . $new_name);
   } else {
     $updatequery = "UPDATE `tour_package` SET `package_name`='$package_name',`description`='$description' WHERE ID=$id";
   }
@@ -72,7 +72,7 @@ if (isset($_POST["Update"])) {
       <!-- Destination Image -->
       <div class="mb-3">
         <input type="file" class="form-control" name="category_image" id="password" placeholder="Your Image">
-        <img src="./package_image/<?php echo $row["image"] ?>" alt="" class="rounded mx-auto d-block" width="450px">
+        <img src="../package_image/<?php echo $row["image"] ?>" alt="" class="rounded mx-auto d-block" width="450px">
 
       </div>
 

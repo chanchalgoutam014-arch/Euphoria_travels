@@ -2,6 +2,11 @@
 include("header.php");
 include("config.php");
 
+if (!isset($_SESSION["email"])) {
+    header("Location: ./login.php?msg=Login First");
+    exit();
+}
+
 if(!isset($_GET['ID'])){
     die("Package Not Found");
 }

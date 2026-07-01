@@ -122,7 +122,7 @@ include("../config.php");
 
                     <?php
 
-                    $query = mysqli_query($db,"SELECT * FROM bookings ORDER BY id DESC LIMIT 5");
+                    $query = mysqli_query($db,"SELECT * FROM bookings ORDER BY ID DESC LIMIT 5");
 
                     while($row=mysqli_fetch_assoc($query))
                     {
@@ -130,13 +130,13 @@ include("../config.php");
 
                     <tr>
 
-                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['ID']; ?></td>
 
                         <td><?php echo $row['user_id']; ?></td>
 
-                        <td><?php echo $row['category_id']; ?></td>
+                        <td><?php echo $row['package_id']; ?></td>
 
-                        <td>₹<?php echo $row['price']; ?></td>
+                        <td>₹<?php echo $row['total_amount']; ?></td>
 
                     </tr>
 

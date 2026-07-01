@@ -46,7 +46,7 @@ $result = mysqli_query($db, $query);
                 <td><?php echo $no ?></td>
 
                 <td>
-                    <img src="destination_image/<?php echo $row['image']; ?>" width="100">
+                    <img src="../destination_image/<?php echo $row['image']; ?>" width="100">
                 </td>
 
                 <td><?php echo $row['destination_name']; ?></td>
