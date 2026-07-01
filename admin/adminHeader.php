@@ -79,8 +79,8 @@ if (!isset($_SESSION["email"])) {
 							Bookings
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="./manage_bookings.php">View Bookings</a>
-							<a class="dropdown-item" href="./manage_packages.php">Mange Packages</a>
+							<a class="dropdown-item" href="./manage_bookings.php">Manage Bookings</a>
+							<a class="dropdown-item" href="./edit_bookings.php">Edit Bookings</a>
 						</div>
 					</li>
 				</ul>

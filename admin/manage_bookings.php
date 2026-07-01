@@ -2,11 +2,20 @@
 include("adminHeader.php");
 include("../config.php");
 
+if (isset($_GET["delete_id"])) {
+    $id = $_GET["delete_id"];
+    $delete_query = "DELETE FROM `destinations` WHERE ID = $id";
+    mysqli_query($db, $delete_query);
+}
+
+
+
 $query = "SELECT
 bookings.*,
 user.F_name,
 user.L_name,
-tour_package.package_name
+tour_package.package_name,
+tour_package.image
 FROM bookings
 INNER JOIN user
 ON bookings.user_id = user.ID
@@ -25,9 +34,9 @@ $result = mysqli_query($db, $query);
 
         <thead class="table-dark">
             <tr>
-                <th>Booking ID</th>
+                <th>Sr No.</th>
                 <th>User Name</th>
-                <th>Destination</th>
+                <th>Package</th>
                 <th>Price</th>
                 <th>Status</th>
                 <th>Booking Date</th>
@@ -37,17 +46,21 @@ $result = mysqli_query($db, $query);
 
         <tbody>
 
-            <?php
-            while ($row = mysqli_fetch_assoc($result)) {
-            ?>
+             <?php
+        $no = 1;
+        while ($row = mysqli_fetch_assoc($result)) { ?>
 
-                <tr>
+            <tr>
 
-                    <td><?php echo $row['id']; ?></td>
+                <td><?php echo $no ?></td>
 
-                    <td><?php echo $row['F_name']." ".$row['L_name']; ?></td>
+                <td>
+                    <img src="../package_image/<?php echo $row['image']; ?>" width="100">
+                </td>
+                    
+                    <td><?php echo $row['F_name'] . " " . $row['L_name']; ?></td> 
 
-                    <td><?php echo $row['destination_name']; ?></td>
+                    <td><?php echo $row['package_name']; ?></td>
 
                     <td>₹<?php echo $row['price']; ?></td>
 
@@ -57,13 +70,12 @@ $result = mysqli_query($db, $query);
 
                     <td>
 
-                        <a href="editBooking.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm">
+                        <a href="edit_Bookings.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm">
                             Edit
                         </a>
 
-                        <a href="deleteBooking.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">
-                            Delete
-                        </a>
+                        <button type="button" class="btn btn-outline-danger"><a href="?delete_id=<?php echo $row['ID']; ?>">Delete</a></button>
+                    
 
                     </td>
 
