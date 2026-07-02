@@ -58,6 +58,7 @@ session_start();
 					<li class="active"><a href="contact.php">Contact Us</a></li>
 					<?php
 					if (isset($_SESSION["email"])) {
+						echo "<li><a href='userprofile.php'>My Profile</a></li>";
 						echo "<li><a href='logout.php'>Logout</a></li>";
 					} else {
 						echo "<li><a href='login.php'>Login</a></li>";

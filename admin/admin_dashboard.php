@@ -112,8 +112,12 @@ include("../config.php");
                     <tr>
                         <th>ID</th>
                         <th>User ID</th>
+                        <th>User Name</th>
                         <th>Package ID</th>
-                        <th>Price</th>
+                        <th>Travel Date</th>
+                        <th>Booking Date</th>
+                        <th>No of Persons</th>
+                        <th>Total Amount</th>
                     </tr>
 
                 </thead>
@@ -122,7 +126,7 @@ include("../config.php");
 
                     <?php
 
-                    $query = mysqli_query($db,"SELECT * FROM bookings ORDER BY ID DESC LIMIT 5");
+                    $query = mysqli_query($db,"SELECT bookings.ID, bookings.user_id, bookings.package_id, bookings.travel_date, bookings.booking_date, bookings.no_of_persons, bookings.total_amount, user.F_name, user.L_name, user.email FROM bookings JOIN user ON bookings.user_id = user.ID ORDER BY bookings.ID DESC LIMIT 5");
 
                     while($row=mysqli_fetch_assoc($query))
                     {
@@ -134,7 +138,15 @@ include("../config.php");
 
                         <td><?php echo $row['user_id']; ?></td>
 
+                        <td><?php echo $row['F_name'] . " " . $row['L_name']; ?></td>
+
                         <td><?php echo $row['package_id']; ?></td>
+
+                        <td><?php echo $row['travel_date']; ?></td>
+
+                        <td><?php echo $row['booking_date']; ?></td>
+
+                        <td><?php echo $row['no_of_persons']; ?></td>
 
                         <td>₹<?php echo $row['total_amount']; ?></td>
 

@@ -16,7 +16,7 @@ if (isset($_POST["login_btn"])) {
 
     session_start();
     $row=mysqli_fetch_assoc($result);
-    $_SESSION["user_ID"] = $row['ID'];
+    $_SESSION["user_id"] = $row['ID'];
     $_SESSION["email"] = $row['email'];
       
      echo "<script>window.location.assign('index.php?msg=login sucessfully')</script>";
