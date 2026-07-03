@@ -55,242 +55,241 @@ $bookingResult = mysqli_query($db, $bookingQuery);
 </div>
 
 
-    <div class="container py-5">
+<div class="container py-5">
 
-        <h2 class="text-center fw-bold mb-5">
+    <h2 class="text-center fw-bold mb-5">
 
-            My Profile
+        My Profile
 
-        </h2>
+    </h2>
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-lg-4">
+        <div class="col-lg-4">
 
-                <div class="card profile-card shadow">
+            <div class="card profile-card shadow">
 
-                    <div class="card-body text-center">
+                <div class="card-body text-center">
 
-                        <img src="images/user.png" class="profile-img">
+                    <img src="images/user.png" class="profile-img">
 
-                        <h3 class="mt-3">
+                    <h3 class="mt-3">
 
-                            <?php echo $user['F_name'] . " " . $user['L_name']; ?>
+                        <?php echo $user['F_name'] . " " . $user['L_name']; ?>
 
-                        </h3>
+                    </h3>
 
-                        <hr>
+                    <hr>
 
-                        <p>
+                    <p>
 
-                            <b>Email</b>
+                        <b>Email</b>
 
-                            <br>
+                        <br>
 
-                            <?php echo $user['email']; ?>
+                        <?php echo $user['email']; ?>
 
-                        </p>
+                    </p>
 
-                        <p>
+                    <p>
 
-                            <b>Contact</b>
+                        <b>Contact</b>
 
-                            <br>
+                        <br>
 
-                            <?php echo $user['contact']; ?>
+                        <?php echo $user['contact']; ?>
 
-                        </p>
+                    </p>
 
-                        <p>
+                    <p>
 
-                            <b>Status :</b>
+                        <b>Status :</b>
 
-                            <?php
+                        <?php
 
-                            if ($user['status'] == "active") {
-                                echo "<span class='badge bg-success'>Active</span>";
-                            } else {
-                                echo "<span class='badge bg-danger'>Inactive</span>";
-                            }
+                        if ($user['status'] == "active") {
+                            echo "<span class='badge bg-success'>Active</span>";
+                        } else {
+                            echo "<span class='badge bg-danger'>Inactive</span>";
+                        }
 
-                            ?>
+                        ?>
 
-                        </p>
+                    </p>
 
-                        <a href="edit_profile.php" class="btn btn-warning w-100 mb-2">
+                    <a href="edit_profile.php" class="btn btn-warning w-100 mb-2">
 
-                            Edit Profile
+                        Edit Profile
 
-                        </a>
+                    </a>
 
-                        <a href="logout.php" class="btn btn-danger w-100">
+                    <a href="logout.php" class="btn btn-danger w-100">
 
-                            Logout
+                        Logout
 
-                        </a>
-
-                    </div>
+                    </a>
 
                 </div>
 
             </div>
 
-            <div class="col-lg-8">
+        </div>
 
-                <div class="card shadow">
+        <div class="col-lg-8">
 
-                    <div class="card-header bg-primary text-white">
+            <div class="card shadow">
 
-                        <h4>
+                <div class="card-header bg-primary text-white">
 
-                            My Bookings
+                    <h4>
 
-                        </h4>
+                        My Bookings
 
-                    </div>
+                    </h4>
 
-                    <div class="card-body">
-                        <?php
+                </div>
 
-                        if (mysqli_num_rows($bookingResult) > 0) {
+                <div class="card-body">
+                    <?php
 
-                            while ($row = mysqli_fetch_assoc($bookingResult)) {
+                    if (mysqli_num_rows($bookingResult) > 0) {
 
-                        ?>
+                        while ($row = mysqli_fetch_assoc($bookingResult)) {
+                            
 
-                                <div class="card booking-card mb-4 shadow-sm">
+                    ?>
 
-                                    <div class="row g-0">
+                            <div class="card booking-card mb-4 shadow-sm">
 
-                                        <div class="col-md-4">
+                                <div class="row g-0">
 
-                                            <img src="<?php echo $row['image']; ?>"
-                                                class="img-fluid rounded-start"
-                                                style="height:250px;width:100%;object-fit:cover;">
+                                    <div class="col-md-4">
 
-                                        </div>
+                                        <img src="<?php echo $row['image']; ?>"
+                                            class="img-fluid rounded-start"
+                                            style="height:250px;width:100%;object-fit:cover;">
 
-                                        <div class="col-md-8">
+                                    </div>
 
-                                            <div class="card-body">
+                                    <div class="col-md-8">
 
-                                                <h4 class="fw-bold">
+                                        <div class="card-body">
 
-                                                    <?php echo $row['package_name']; ?>
+                                            <h4 class="fw-bold">
 
-                                                </h4>
+                                                <?php echo $row['package_name']; ?>
 
-                                                <hr>
+                                            </h4>
 
-                                                <p>
+                                            <hr>
 
-                                                    <strong>Booking ID :</strong>
+                                            <p>
 
-                                                    <?php echo $row['ID']; ?>
+                                                <strong>Booking ID :</strong>
 
-                                                </p>
+                                                <?php echo $row['ID']; ?>
 
-                                                <p>
+                                            </p>
 
-                                                    <strong>Booking Date :</strong>
+                                            <p>
 
-                                                    <?php echo $row['booking_date']; ?>
+                                                <strong>Booking Date :</strong>
 
-                                                </p>
+                                                <?php echo $row['booking_date']; ?>
 
-                                                <p>
+                                            </p>
 
-                                                    <strong>Travel Date :</strong>
+                                            <p>
 
-                                                    <?php echo $row['travel_date']; ?>
+                                                <strong>Travel Date :</strong>
 
-                                                </p>
+                                                <?php echo $row['travel_date']; ?>
 
-                                                <p>
+                                            </p>
 
-                                                    <strong>No. of Persons :</strong>
+                                            <p>
 
-                                                    <?php echo $row['no_of_persons']; ?>
+                                                <strong>No. of Persons :</strong>
 
-                                                </p>
+                                                <?php echo $row['no_of_persons']; ?>
 
-                                                <p>
+                                            </p>
 
-                                                    <strong>Total Amount :</strong>
+                                            <p>
 
-                                                    ₹ <?php echo $row['total_amount']; ?>
+                                                <strong>Total Amount :</strong>
 
-                                                </p>
+                                                ₹ <?php echo $row['total_amount']; ?>
 
-                                                <p>
+                                            </p>
 
-                                                    <strong>Status :</strong>
+                                            <p>
 
-                                                    <?php
+                                                <strong>Status :</strong>
 
-                                                    if ($row['status'] == "active") {
-                                                        echo "<span class='badge bg-success'>Confirmed</span>";
-                                                    } elseif ($row['status'] == "pending") {
-                                                        echo "<span class='badge bg-warning text-dark'>Pending</span>";
-                                                    } elseif ($row['status'] == "completed") {
-                                                        echo "<span class='badge bg-primary'>Completed</span>";
-                                                    } else {
-                                                        echo "<span class='badge bg-danger'>Cancelled</span>";
-                                                    }
+                                                <?php
 
-                                                    ?>
+                                                if ($row['status'] == "active") {
+                                                    echo "<span class='badge bg-success'>Confirmed</span>";
+                                                } elseif ($row['status'] == "pending") {
+                                                    echo "<span class='badge bg-warning text-dark'>Pending</span>";
+                                                } elseif ($row['status'] == "completed") {
+                                                    echo "<span class='badge bg-primary'>Completed</span>";
+                                                } else {
+                                                    echo "<span class='badge bg-danger'>Cancelled</span>";
+                                                }
 
-                                                </p>
+                                                ?>
 
-                                                <div class="mt-3">
+                                            </p>
 
-                                                    <a href="booking_details.php?id=<?php echo $row['ID']; ?>"
-                                                        class="btn btn-primary btn-sm">
+                                            <div class="mt-3">
 
-                                                        View Details
+                                                <a href="booking_details.php?id=<?php echo $row['ID']; ?>"
+                                                    class="btn btn-primary btn-sm">
+
+                                                    View Details
+
+                                                </a>
+
+                                                <?php
+
+                                                if ($row['status'] == "completed") {
+
+                                                ?>
+
+                                                    <a href="addreviews.php?id=<?php echo $row['package_id']; ?>"
+                                                        class="btn btn-success btn-sm">
+
+                                                        Add Review
 
                                                     </a>
 
-                                                    <?php
+                                                <?php
 
-                                                    if ($row['status'] == "completed") {
+                                                }
 
-                                                    ?>
+                                                ?>
 
-                                                        <a href="add_review.php?id=<?php echo $row['package_id']; ?>"
-                                                            class="btn btn-success btn-sm">
+                                                <?php
 
-                                                            Add Review
+                                                if ($row['status'] == "pending") {
 
-                                                        </a>
+                                                ?>
 
-                                                    <?php
+                                                    <a href="cancel_booking.php?id=<?php echo $row['ID']; ?>"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Cancel this booking?')">
 
-                                                    }
+                                                        Cancel Booking
 
-                                                    ?>
+                                                    </a>
 
-                                                    <?php
+                                                <?php
 
-                                                    if ($row['status'] == "pending") {
+                                                }
 
-                                                    ?>
-
-                                                        <a href="cancel_booking.php?id=<?php echo $row['ID']; ?>"
-                                                            class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Cancel this booking?')">
-
-                                                            Cancel Booking
-
-                                                        </a>
-
-                                                    <?php
-
-                                                    }
-
-                                                    ?>
-
-                                                </div>
+                                                ?>
 
                                             </div>
 
@@ -300,34 +299,34 @@ $bookingResult = mysqli_query($db, $bookingQuery);
 
                                 </div>
 
-                            <?php
-
-                            }
-                        } else {
-
-                            ?>
-
-                            <div class="alert alert-info text-center">
-
-                                <h4>No Bookings Found</h4>
-
-                                <p>You haven't booked any package yet.</p>
-
-                                <a href="tour_packages.php" class="btn btn-primary">
-
-                                    Explore Packages
-
-                                </a>
-
                             </div>
 
                         <?php
 
                         }
+                    } else {
 
                         ?>
 
-                    </div>
+                        <div class="alert alert-info text-center">
+
+                            <h4>No Bookings Found</h4>
+
+                            <p>You haven't booked any package yet.</p>
+
+                            <a href="tour_packages.php" class="btn btn-primary">
+
+                                Explore Packages
+
+                            </a>
+
+                        </div>
+
+                    <?php
+
+                    }
+
+                    ?>
 
                 </div>
 
@@ -336,3 +335,8 @@ $bookingResult = mysqli_query($db, $bookingQuery);
         </div>
 
     </div>
+
+</div>
+<?php
+include("footer.php");
+?>
