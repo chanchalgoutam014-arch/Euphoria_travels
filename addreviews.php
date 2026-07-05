@@ -3,67 +3,162 @@
 include("header.php");
 include("config.php");
 
-$user_id=$_SESSION['user_id'];
-$package_id=$_GET['package_id'];
+// Login Check
+if (!isset($_SESSION['user_id'])) {
+    header("Location:login.php");
+    exit();
+}
 
-if(isset($_POST['submit'])){
+$user_id = $_SESSION['user_id'];
 
-$rating=$_POST['rating'];
+// Package ID Check
+if (!isset($_GET['package_id'])) {
+    echo "<script>
+    alert('Invalid Request');
+    window.location='userprofile.php';
+    </script>";
+    exit();
+}
 
-$review=$_POST['review'];
+$package_id = $_GET['package_id'];
 
-$query="INSERT INTO reviewa ( user_id, package_id, rating, review)
 
-VALUES('$user_id','$package_id','$rating','$review')";
+// Save Review
+if (isset($_POST['submit_review'])) {
 
-mysqli_query($db,$query);
+    $rating = $_POST['rating'];
+    $review = mysqli_real_escape_string($db, $_POST['review']);
 
-header("location:userprofile.php");
+    $check = mysqli_query($db, "
+    SELECT *
+    FROM review
+    WHERE user_id='$user_id'
+    AND package_id='$package_id'
+    ");
 
+    if (mysqli_num_rows($check) > 0) {
+
+        echo "<script>
+        alert('You have already reviewed this package.');
+        </script>";
+    } else {
+
+        mysqli_query($db, "
+        INSERT INTO review
+        (user_id,package_id,rating,review,status)
+
+        VALUES
+
+        ('$user_id',
+        '$package_id',
+        '$rating',
+        '$review',
+        'active')
+        ");
+
+        echo "<script>
+        alert('Review Added Successfully');
+        window.location='userprofile.php';
+        </script>";
+    }
 }
 
 ?>
 
-<form method="POST">
 
-<h3>Add Review</h3>
+<div class="container mt-5 mb-5">
 
-<label>Rating</label>
+    <div class="row justify-content-center">
 
-<select name="rating" class="form-control">
+        <div class="col-lg-8">
 
-<option value="5">⭐⭐⭐⭐⭐</option>
+            <div class="card shadow border-0 rounded">
 
-<option value="4">⭐⭐⭐⭐</option>
+                <div class="card-header bg-success text-white">
 
-<option value="3">⭐⭐⭐</option>
+                    <h3 class="mb-0">
 
-<option value="2">⭐⭐</option>
+                        ⭐ Add Review
 
-<option value="1">⭐</option>
+                    </h3>
 
-</select>
+                </div>
 
-<br>
+                <div class="card-body">
 
-<textarea name="review"
+                    <form method="POST">
 
-class="form-control"
+                        <div class="form-group">
 
-placeholder="Write your review..."
+                            <label>
 
-required>
+                                Rating
+
+                            </label>
+
+                            <select
+                                class="form-control"
+                                name="rating"
+                                required>
+
+                                <option value="">Choose Rating</option>
+
+                                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+
+                                <option value="4">⭐⭐⭐⭐ Very Good</option>
+
+                                <option value="3">⭐⭐⭐ Good</option>
+
+                                <option value="2">⭐⭐ Fair</option>
+
+                                <option value="1">⭐ Poor</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group mt-3">
+
+                            <label>
+
+                                Write Review
+
+                            </label>
+
+                            <textarea
+                                name="review"
+                                class="form-control"
+                                rows="6"
+                                placeholder="Share your travel experience..."
+                                required>
 
 </textarea>
 
-<br>
+                        </div>
 
-<input type="submit"
+                        <div class="mt-4 text-center">
 
-name="submit"
+                            <button
+                                type="submit"
+                                name="submit_review"
+                                class="btn btn-success btn-lg">
 
-value="Submit Review"
+                                Submit Review
 
-class="btn btn-success">
+                            </button>
 
-</form>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<?php include("footer.php"); ?>

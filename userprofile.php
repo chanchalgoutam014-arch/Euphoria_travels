@@ -348,13 +348,6 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
 
                                                         <div class="d-flex flex-wrap gap-2 mt-3">
 
-                                                            <a href="booking_details.php?id=<?php echo $row['ID']; ?>"
-                                                                class="btn btn-primary">
-
-                                                                View Details
-
-                                                            </a>
-
                                                             <?php if ($row['status'] == "pending") { ?>
 
                                                                 <a href="cancel_booking.php?id=<?php echo $row['ID']; ?>"
@@ -369,12 +362,14 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
 
                                                             <?php if ($row['status'] == "completed") { ?>
 
-                                                                <a href="add_review.php?id=<?php echo $row['package_id']; ?>"
-                                                                    class="btn btn-success">
+                                                                <button
+                                                                    class="btn btn-success btn-sm"
+                                                                    data-toggle="modal"
+                                                                    data-target="#reviewModal<?php echo $row['ID']; ?>">
 
                                                                     Add Review
 
-                                                                </a>
+                                                                </button>
 
                                                             <?php } ?>
 

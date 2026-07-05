@@ -27,8 +27,7 @@ $result = mysqli_query($db, $query);
 
 // update status
 
-if(isset($_POST['update_status']))
-{
+if (isset($_POST['update_status'])) {
     $booking_id = $_POST['booking_id'];
     $status = $_POST['status'];
 
@@ -36,7 +35,7 @@ if(isset($_POST['update_status']))
                SET status='$status'
                WHERE ID='$booking_id'";
 
-    mysqli_query($db,$update);
+    mysqli_query($db, $update);
 
     echo "<script>
             alert('Booking Status Updated Successfully');
@@ -55,33 +54,33 @@ if(isset($_POST['update_status']))
             <tr>
                 <th>Sr No.</th>
                 <th>User Name</th>
-                <th>Package</th>
+                <th>Package Image</th>
+                <th>Package Name</th>
                 <th>Price</th>
                 <th>Status</th>
                 <th>Booking Date</th>
-                <th>Action</th>
+                <th colspan="2">Action</th>
             </tr>
         </thead>
 
         <tbody>
 
-             <?php
-        $no = 1;
-        while ($row = mysqli_fetch_assoc($result)) { ?>
+            <?php
+            $no = 1;
+            while ($row = mysqli_fetch_assoc($result)) { ?>
 
-            <tr>
+                <tr>
 
-                <td><?php echo $no ?></td>
+                    <td><?php echo $no ?></td>
 
-                <td>
-                    <img src="../package_image/<?php echo $row['image']; ?>" width="100">
-                </td>
-                    
-                    <td><?php echo $row['F_name'] . " " . $row['L_name']; ?></td> 
+                    <td><?php echo $row['F_name'] . " " . $row['L_name']; ?></td>
+                    <td>
+                        <img src="../package_image/<?php echo $row['image']; ?>" width="100">
+                    </td>
 
                     <td><?php echo $row['package_name']; ?></td>
 
-                    <td>₹<?php echo $row['price']; ?></td>
+                    <td>₹<?php echo $row['total_amount']; ?></td>
 
                     <td><?php echo $row['status']; ?></td>
 
@@ -90,16 +89,34 @@ if(isset($_POST['update_status']))
                     <td>
                         <button type="button" class="btn btn-outline-danger"><a href="?delete_id=<?php echo $row['ID']; ?>">Delete</a></button>
 
-                        <form method="POST" class="mt-2">
-                            <input type="hidden" name="booking_id" value="<?php echo $row['ID']; ?>">
-                            <select name="status" class="form-select mb-2">
-                                <option value="pending" <?php if ($row['status'] == 'pending') echo 'selected'; ?>>Pending</option>
-                                <option value="paid" <?php if ($row['status'] == 'paid') echo 'selected'; ?>>Paid</option>
-                                <option value="confirmed" <?php if ($row['status'] == 'confirmed') echo 'selected'; ?>>Confirmed</option>
-                                <option value="completed" <?php if ($row['status'] == 'completed') echo 'selected'; ?>>Completed</option>
-                                <option value="rejected" <?php if ($row['status'] == 'rejected') echo 'selected'; ?>>Rejected</option>
+
+                    </td>
+                    <td>
+                        <form method="POST" class="d-flex align-items-center">
+
+                            <input type="hidden"
+                                name="booking_id"
+                                value="<?php echo $row['ID']; ?>">
+
+                            <select name="status"
+                                class="form-control form-control-sm mr-2"
+                                style="width:140px;">
+
+                                <option value="pending">Pending</option>
+                                <option value="paid">Paid</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="completed">Completed</option>
+                                <option value="rejected">Rejected</option>
+
                             </select>
-                            <button type="submit" name="update_status" class="btn btn-outline-primary">Update Status</button>
+
+                            <button class="btn btn-success btn-sm"
+                                name="update_status">
+
+                                <i class="fa fa-check"></i> Update
+
+                            </button>
+
                         </form>
                     </td>
 
