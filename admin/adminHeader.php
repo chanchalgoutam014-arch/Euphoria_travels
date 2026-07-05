@@ -82,6 +82,14 @@ if (!isset($_SESSION["email"])) {
 							<a class="dropdown-item" href="./manage_bookings.php">Manage Bookings</a>
 						</div>
 					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Enquiries
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="./manage_enquiry.php">Manage Enquiries</a>
+						</div>
+					</li>
 				</ul>
 
 				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
