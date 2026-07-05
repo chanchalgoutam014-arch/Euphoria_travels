@@ -24,6 +24,25 @@ ON bookings.package_id = tour_package.ID
 ORDER BY bookings.id DESC";
 
 $result = mysqli_query($db, $query);
+
+// update status
+
+if(isset($_POST['update_status']))
+{
+    $booking_id = $_POST['booking_id'];
+    $status = $_POST['status'];
+
+    $update = "UPDATE bookings
+               SET status='$status'
+               WHERE ID='$booking_id'";
+
+    mysqli_query($db,$update);
+
+    echo "<script>
+            alert('Booking Status Updated Successfully');
+            window.location='manage_bookings.php';
+          </script>";
+}
 ?>
 
 <div class="container mt-5">
@@ -69,14 +88,19 @@ $result = mysqli_query($db, $query);
                     <td><?php echo $row['booking_date']; ?></td>
 
                     <td>
-
-                        <a href="edit_Bookings.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm">
-                            Edit
-                        </a>
-
                         <button type="button" class="btn btn-outline-danger"><a href="?delete_id=<?php echo $row['ID']; ?>">Delete</a></button>
-                    
 
+                        <form method="POST" class="mt-2">
+                            <input type="hidden" name="booking_id" value="<?php echo $row['ID']; ?>">
+                            <select name="status" class="form-select mb-2">
+                                <option value="pending" <?php if ($row['status'] == 'pending') echo 'selected'; ?>>Pending</option>
+                                <option value="paid" <?php if ($row['status'] == 'paid') echo 'selected'; ?>>Paid</option>
+                                <option value="confirmed" <?php if ($row['status'] == 'confirmed') echo 'selected'; ?>>Confirmed</option>
+                                <option value="completed" <?php if ($row['status'] == 'completed') echo 'selected'; ?>>Completed</option>
+                                <option value="rejected" <?php if ($row['status'] == 'rejected') echo 'selected'; ?>>Rejected</option>
+                            </select>
+                            <button type="submit" name="update_status" class="btn btn-outline-primary">Update Status</button>
+                        </form>
                     </td>
 
                 </tr>

@@ -3,7 +3,30 @@
 include("adminHeader.php");
 include("../config.php");
 
+
+// Total Destinations
+$totalDestination = mysqli_num_rows(mysqli_query($db, "SELECT * FROM destinations"));
+
+// Total Packages
+$totalPackage = mysqli_num_rows(mysqli_query($db, "SELECT * FROM tour_package"));
+
+// Total Users
+$totalUser = mysqli_num_rows(mysqli_query($db, "SELECT * FROM user"));
+
+// Booking Status
+$pending = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE status='pending'"));
+
+$paid = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE status='paid'"));
+
+$confirmed = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE status='confirmed'"));
+
+$completed = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE status='completed'"));
+
+$rejected = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE status='rejected'"));
+
 ?>
+
+
 <div class="position-relative" style="height:500px; overflow:hidden;">
 
 
@@ -26,178 +49,82 @@ include("../config.php");
 
 <div class="container-fluid py-4">
 
-
     <div class="row">
 
-        <!-- Destinations -->
-        <div class="col-md-3 mb-4">
-            <div class="card text-center shadow border-0">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 text-center">
                 <div class="card-body">
                     <h5>Total Destinations</h5>
-
-                    <?php
-                    $query = mysqli_query($db, "SELECT * FROM destinations");
-                    $totalDestination = mysqli_num_rows($query);
-                    ?>
-
-                    <h1 class="text-primary"><?php echo $totalDestination; ?></h1>
+                    <h2 class="text-primary"><?php echo $totalDestination; ?></h2>
                 </div>
             </div>
         </div>
 
-        <!-- Packages -->
-        <div class="col-md-3 mb-4">
-            <div class="card text-center shadow border-0">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 text-center">
                 <div class="card-body">
                     <h5>Total Packages</h5>
-
-                    <?php
-                    $query = mysqli_query($db, "SELECT * FROM tour_package");
-                    $totalPackage = mysqli_num_rows($query);
-                    ?>
-
-                    <h1 class="text-success"><?php echo $totalPackage; ?></h1>
+                    <h2 class="text-success"><?php echo $totalPackage; ?></h2>
                 </div>
             </div>
         </div>
 
-        <!-- Users -->
-        <div class="col-md-3 mb-4">
-            <div class="card text-center shadow border-0">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 text-center">
                 <div class="card-body">
                     <h5>Total Users</h5>
-
-                    <?php
-                    $query = mysqli_query($db, "SELECT * FROM user");
-                    $totalUser = mysqli_num_rows($query);
-                    ?>
-
-                    <h1 class="text-warning"><?php echo $totalUser; ?></h1>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bookings -->
-        <div class="col-md-3 mb-4">
-            <div class="card text-center shadow border-0">
-                <div class="card-body">
-                    <h5>Total Bookings</h5>
-
-                    <?php
-                    $query = mysqli_query($db, "SELECT * FROM bookings");
-                    $totalBooking = mysqli_num_rows($query);
-                    ?>
-
-                    <h1 class="text-danger"><?php echo $totalBooking; ?></h1>
+                    <h2 class="text-warning"><?php echo $totalUser; ?></h2>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Recent Bookings -->
+    <div class="row">
 
-    <div class="card shadow mt-4">
-
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Recent Bookings</h4>
+        <div class="col-md-2 mb-4">
+            <div class="card bg-warning text-white shadow border-0 text-center">
+                <div class="card-body">
+                    <h6>Pending</h6>
+                    <h2><?php echo $pending; ?></h2>
+                </div>
+            </div>
         </div>
 
-        <div class="card-body">
+        <div class="col-md-2 mb-4">
+            <div class="card bg-info text-white shadow border-0 text-center">
+                <div class="card-body">
+                    <h6>Paid</h6>
+                    <h2><?php echo $paid; ?></h2>
+                </div>
+            </div>
+        </div>
 
-            <table class="table table-bordered table-hover">
+        <div class="col-md-3 mb-4">
+            <div class="card bg-success text-white shadow border-0 text-center">
+                <div class="card-body">
+                    <h6>Confirmed</h6>
+                    <h2><?php echo $confirmed; ?></h2>
+                </div>
+            </div>
+        </div>
 
-                <thead class="table-light">
+        <div class="col-md-3 mb-4">
+            <div class="card bg-primary text-white shadow border-0 text-center">
+                <div class="card-body">
+                    <h6>Completed</h6>
+                    <h2><?php echo $completed; ?></h2>
+                </div>
+            </div>
+        </div>
 
-                    <tr>
-                        <th>ID</th>
-                        <th>User ID</th>
-                        <th>User Name</th>
-                        <th>Package ID</th>
-                        <th>Travel Date</th>
-                        <th>Booking Date</th>
-                        <th>No of Persons</th>
-                        <th>Total Amount</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <?php
-                    // ✅ Update booking status
-                    if (isset($_GET['status_id']) && isset($_GET['status'])) {
-                        $id = $_GET['status_id'];
-                        $status = $_GET['status'];
-
-                        $updateQuery = "UPDATE bookings SET status='$status' WHERE ID=$id";
-                        mysqli_query($db, $updateQuery);
-
-                        echo "<script>window.location.href='allBookings.php';</script>";
-                    }
-
-                    $query = mysqli_query($db, "SELECT bookings.ID, bookings.user_id, bookings.package_id, bookings.travel_date, bookings.booking_date, bookings.no_of_persons, bookings.total_amount, user.F_name, user.L_name, user.email FROM bookings JOIN user ON bookings.user_id = user.ID ORDER BY bookings.ID DESC LIMIT 5");
-
-
-                    while ($row = mysqli_fetch_assoc($query)) {
-                    ?>
-
-                        <tr>
-
-                            <td><?php echo $row['ID']; ?></td>
-
-                            <td><?php echo $row['user_id']; ?></td>
-
-                            <td><?php echo $row['F_name'] . " " . $row['L_name']; ?></td>
-
-                            <td><?php echo $row['package_id']; ?></td>
-
-                            <td><?php echo $row['travel_date']; ?></td>
-
-                            <td><?php echo $row['booking_date']; ?></td>
-
-                            <td><?php echo $row['no_of_persons']; ?></td>
-
-                            <td>₹<?php echo $row['total_amount']; ?></td>
-
-                            <td>
-                                <?php
-                                if ($row["status"] == "pending") {
-                                    echo "<span class='text-warning'>Pending</span>";
-                                } else if ($row["status"] == "accepted") {
-                                    echo "<span class='text-success'>Accepted</span>";
-                                } else {
-                                    echo "<span class='text-danger'>Rejected</span>";
-                                }
-                                ?>
-                            </td>
-
-                            <td><?php echo $row["created_at"]; ?></td>
-
-                            <td>
-                                <?php if ($row["status"] == "pending") { ?>
-
-                                    <a href="?status_id=<?php echo $row['ID']; ?>&status=accepted"
-                                        class="btn btn-success btn-sm">Accept</a>
-
-                                    <a href="?status_id=<?php echo $row['ID']; ?>&status=rejected"
-                                        class="btn btn-danger btn-sm">Reject</a>
-
-                                <?php } else { ?>
-                                    <span class="text-muted">No Action</span>
-                                <?php } ?>
-                            </td>
-
-                        </tr>
-
-                    <?php
-                    }
-                    ?>
-
-                </tbody>
-
-            </table>
-
+        <div class="col-md-2 mb-4">
+            <div class="card bg-danger text-white shadow border-0 text-center">
+                <div class="card-body">
+                    <h6>Rejected</h6>
+                    <h2><?php echo $rejected; ?></h2>
+                </div>
+            </div>
         </div>
 
     </div>
