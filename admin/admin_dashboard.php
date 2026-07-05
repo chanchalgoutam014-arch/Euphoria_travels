@@ -161,7 +161,13 @@ $rejected = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE stat
 
                 <?php
 
-                $query = mysqli_query($db, "SELECT * FROM bookings ORDER BY ID DESC LIMIT 10");
+                $query = mysqli_query($db, "SELECT bookings.*, user.F_name, user.L_name, user.email
+FROM bookings
+INNER JOIN user
+ON bookings.user_id = user.ID
+ORDER BY bookings.ID DESC
+LIMIT 10
+");
 
                 while ($row = mysqli_fetch_assoc($query)) {
                 ?>
@@ -169,6 +175,10 @@ $rejected = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE stat
                     <tr>
 
                         <td><?php echo $row['ID']; ?></td>
+
+                        <td><?php echo $row['F_name'] . " " . $row['L_name']; ?></td>
+
+                        <td><?php echo $row['email']; ?></td>
 
                         <td><?php echo $row['booking_date']; ?></td>
 

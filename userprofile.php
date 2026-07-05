@@ -723,6 +723,26 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
                                                     ?>
 
                                                 </p>
+                                                <p>
+                                                    <strong>Admin Reply :</strong><br>
+
+                                                    <?php
+
+                                                    if (!empty($row['reply'])) {
+
+                                                        echo "<div class='alert alert-success mt-2 mb-0'>"
+                                                            . nl2br(htmlspecialchars($row['reply'])) .
+                                                            "</div>";
+                                                    } else {
+
+                                                        echo "<div class='alert alert-warning mt-2 mb-0'>
+                Waiting for Admin Reply...
+              </div>";
+                                                    }
+
+                                                    ?>
+
+                                                </p>
 
                                                 <small class="text-muted">
 

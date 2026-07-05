@@ -6,30 +6,38 @@ $query = "SELECT * FROM enquiry ORDER BY ID DESC";
 $result = mysqli_query($db, $query);
 
 
-if(isset($_POST['send_reply']))
-{
+if (isset($_POST['send_reply'])) {
 
-    $id=$_POST['enquiry_id'];
+    $id = $_POST['enquiry_id'];
 
-    $reply=mysqli_real_escape_string($db,$_POST['reply']);
+    $reply = mysqli_real_escape_string($db, $_POST['reply']);
 
-    $query="UPDATE enquiry
+    $query = "UPDATE enquiry
             SET reply='$reply',
                 status='Replied'
             WHERE ID='$id'";
 
-    mysqli_query($db,$query);
+    mysqli_query($db, $query);
 
     echo "<script>
             alert('Reply Sent Successfully');
             window.location='manage_enquiry.php';
           </script>";
-
 }
 
 
 ?>
-
+<div class="hero hero-inner">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mx-auto text-center">
+        <div class="intro-wrap">
+          <h1 class="mb-0">Manage Enquiries</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Manage Enquiries</h2>
 
@@ -81,128 +89,13 @@ if(isset($_POST['send_reply']))
 
                 <td>
 
-                    <button
-                        class='btn btn-success btn-sm'
-                        data-toggle='modal'
-                        data-target='#replyModal<?php echo $row['ID']; ?>'>
-
+                    <a href="reply_enquiry.php?id=<?php echo $row['ID']; ?>" class="btn btn-success btn-sm">
                         Reply
+                    </a>
 
-                    </button>
-                    <div class="modal fade"
-                        id="replyModal<?php echo $row['ID']; ?>">
-
-                        <div class="modal-dialog modal-lg">
-
-                            <div class="modal-content">
-
-                                <div class="modal-header bg-success text-white">
-
-                                    <h5 class="modal-title">
-                                        Reply Enquiry
-                                    </h5>
-
-                                    <button
-                                        type="button"
-                                        class="close"
-                                        data-dismiss="modal">
-
-                                        &times;
-
-                                    </button>
-
-                                </div>
-
-                                <div class="modal-body">
-
-                                    <form method="POST">
-
-                                        <input
-                                            type="hidden"
-                                            name="enquiry_id"
-                                            value="<?php echo $row['id']; ?>">
-
-                                        <div class="form-group">
-
-                                            <label><b>Name</b></label>
-
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                value="<?php echo $row['name']; ?>"
-                                                readonly>
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label><b>Email</b></label>
-
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                value="<?php echo $row['email']; ?>"
-                                                readonly>
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label><b>Subject</b></label>
-
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                value="<?php echo $row['subject']; ?>"
-                                                readonly>
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label><b>Message</b></label>
-
-                                            <textarea
-                                                class="form-control"
-                                                rows="4"
-                                                readonly><?php echo $row['message']; ?></textarea>
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label><b>Reply</b></label>
-
-                                            <textarea
-                                                name="reply"
-                                                class="form-control"
-                                                rows="5"
-                                                required><?php echo $row['reply']; ?></textarea>
-
-                                        </div>
-
-                                        <button
-                                            type="submit"
-                                            name="send_reply"
-                                            class="btn btn-success btn-block">
-
-                                            Send Reply
-
-                                        </button>
-
-                                    </form>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <a href='delete_enquiry.php?id=<?= $row['ID']; ?>'
+                    <a href="delete_enquiry.php?id=<?php echo $row['ID']; ?>"
                         class="btn btn-danger btn-sm"
-                        onclick="return confirm('Delete enquiry?')">
+                        onclick="return confirm('Delete this enquiry?')">
                         Delete
                     </a>
 
