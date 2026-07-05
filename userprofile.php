@@ -33,6 +33,36 @@ ORDER BY bookings.ID DESC";
 
 $bookingResult = mysqli_query($db, $bookingQuery);
 
+
+// review query
+
+$reviewQuery = "SELECT reviewa.*,
+tour_package.package_name
+
+FROM reviewa
+
+INNER JOIN tour_package
+
+ON reviewa.package_id = tour_package.ID
+
+WHERE reviewa.user_id='$user_id'
+
+ORDER BY reviewa.ID DESC";
+
+$reviewResult = mysqli_query($db, $reviewQuery);
+
+
+// enquiry query
+$enquiryQuery = "SELECT *
+
+FROM enquiry
+
+WHERE email='" . $user['email'] . "'
+
+ORDER BY ID DESC";
+
+$enquiryResult = mysqli_query($db, $enquiryQuery);
+
 ?>
 <div class="position-relative" style="height:500px; overflow:hidden;">
 
@@ -53,81 +83,73 @@ $bookingResult = mysqli_query($db, $bookingQuery);
     </div>
 
 </div>
-
-
 <div class="container py-5">
 
     <h2 class="text-center fw-bold mb-5">
-
         My Profile
-
     </h2>
 
     <div class="row">
 
-        <div class="col-lg-4">
+        <!-- Left Sidebar -->
 
-            <div class="card profile-card shadow">
+        <div class="col-lg-3">
+
+            <div class="card shadow border-0 rounded-4">
 
                 <div class="card-body text-center">
 
-                    <img src="images/user.png" class="profile-img">
+                    <img src="images/user.png"
+                        class="rounded-circle mb-3"
+                        width="120"
+                        height="120"
+                        style="object-fit:cover; border:4px solid #0d6efd;">
 
-                    <h3 class="mt-3">
-
+                    <h4 class="fw-bold">
                         <?php echo $user['F_name'] . " " . $user['L_name']; ?>
+                    </h4>
 
-                    </h3>
+                    <p class="text-muted">
+                        <?php echo $user['email']; ?>
+                    </p>
 
                     <hr>
 
-                    <p>
+                    <div class="list-group">
 
-                        <b>Email</b>
+                        <a href="#profile"
+                            class="list-group-item list-group-item-action active"
+                            data-toggle="tab">
 
-                        <br>
+                            👤 Profile
 
-                        <?php echo $user['email']; ?>
+                        </a>
 
-                    </p>
+                        <a href="#bookings"
+                            class="list-group-item list-group-item-action"
+                            data-toggle="tab">
 
-                    <p>
+                            📋 My Bookings
 
-                        <b>Contact</b>
+                        </a>
 
-                        <br>
+                        <a href="#reviews"
+                            class="list-group-item list-group-item-action"
+                            data-toggle="tab">
 
-                        <?php echo $user['contact']; ?>
+                            ⭐ My Reviews
 
-                    </p>
+                        </a>
 
-                    <p>
+                        <a href="#enquiries"
+                            class="list-group-item list-group-item-action"
+                            data-toggle="tab">
 
-                        <b>Status :</b>
+                            📩 My Enquiries
 
-                        <?php
+                        </a>
 
-                        if ($user['status'] == "active") {
-                            echo "<span class='badge bg-success'>Active</span>";
-                        } else {
-                            echo "<span class='badge bg-danger'>Inactive</span>";
-                        }
-
-                        ?>
-
-                    </p>
-
-                    <a href="edit_profile.php" class="btn btn-warning w-100 mb-2">
-
-                        Edit Profile
-
-                    </a>
-
-                    <a href="logout.php" class="btn btn-danger w-100">
-
-                        Logout
-
-                    </a>
+                    </div>
 
                 </div>
 
@@ -135,198 +157,473 @@ $bookingResult = mysqli_query($db, $bookingQuery);
 
         </div>
 
-        <div class="col-lg-8">
+        <!-- Right Content -->
 
-            <div class="card shadow">
+        <div class="col-lg-9">
 
-                <div class="card-header bg-primary text-white">
+            <div class="tab-content">
 
-                    <h4>
+                <!-- Profile -->
 
-                        My Bookings
+                <div class="tab-pane fade show active"
+                    id="profile">
 
-                    </h4>
+                    <div class="card shadow border-0 rounded-4">
+
+                        <div class="card-header bg-primary text-white">
+
+                            <h4 class="mb-0">
+
+                                Profile Details
+
+                            </h4>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <table class="table table-bordered">
+
+                                <tr>
+                                    <th width="30%">Full Name</th>
+                                    <td><?php echo $user['F_name'] . " " . $user['L_name']; ?></td>
+                                </tr>
+
+                                <tr>
+                                    <th>Email</th>
+                                    <td><?php echo $user['email']; ?></td>
+                                </tr>
+
+                                <tr>
+                                    <th>Contact</th>
+                                    <td><?php echo $user['contact']; ?></td>
+                                </tr>
+
+                                <tr>
+                                    <th>Address</th>
+                                    <td><?php echo $user['address']; ?></td>
+                                </tr>
+
+                                <tr>
+                                    <th>Account Status</th>
+                                    <td>
+
+                                        <?php
+
+                                        if ($user['status'] == "active") {
+                                            echo "<span class='badge bg-success'>Active</span>";
+                                        } else {
+                                            echo "<span class='badge bg-danger'>Inactive</span>";
+                                        }
+
+                                        ?>
+
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
-                    <?php
+                <!-- Bookings -->
 
-                    if (mysqli_num_rows($bookingResult) > 0) {
+                <div class="tab-pane fade"
+                    id="bookings">
 
-                        while ($row = mysqli_fetch_assoc($bookingResult)) {
-                            
+                    <div class="card shadow border-0 rounded-4">
 
-                    ?>
+                        <div class="card-header bg-success text-white">
 
-                            <div class="card booking-card mb-4 shadow-sm">
+                            <h4 class="mb-0">
 
-                                <div class="row g-0">
+                                My Bookings
 
-                                    <div class="col-md-4">
+                            </h4>
 
-                                        <img src="<?php echo $row['image']; ?>"
-                                            class="img-fluid rounded-start"
-                                            style="height:250px;width:100%;object-fit:cover;">
+                        </div>
 
-                                    </div>
+                        <div class="card-body">
 
-                                    <div class="col-md-8">
+                            <div class="alert alert-info">
 
-                                        <div class="card-body">
+                                <?php
 
-                                            <h4 class="fw-bold">
+                                if (mysqli_num_rows($bookingResult) > 0) {
 
-                                                <?php echo $row['package_name']; ?>
+                                    while ($row = mysqli_fetch_assoc($bookingResult)) {
 
-                                            </h4>
+                                ?>
 
-                                            <hr>
+                                        <div class="card shadow border-0 rounded-4 mb-4">
 
-                                            <p>
+                                            <div class="row g-0">
 
-                                                <strong>Booking ID :</strong>
+                                                <div class="col-md-4">
 
-                                                <?php echo $row['ID']; ?>
+                                                    <img src="package_image/<?php echo $row['image']; ?>"
+                                                        class="img-fluid rounded-start"
+                                                        style="height:250px;width:100%;object-fit:cover;">
 
-                                            </p>
+                                                </div>
 
-                                            <p>
+                                                <div class="col-md-8">
 
-                                                <strong>Booking Date :</strong>
+                                                    <div class="card-body">
 
-                                                <?php echo $row['booking_date']; ?>
+                                                        <h3 class="fw-bold mb-3">
 
-                                            </p>
+                                                            <?php echo $row['package_name']; ?>
 
-                                            <p>
+                                                        </h3>
 
-                                                <strong>Travel Date :</strong>
+                                                        <div class="row">
 
-                                                <?php echo $row['travel_date']; ?>
+                                                            <div class="col-md-6">
 
-                                            </p>
+                                                                <p>
 
-                                            <p>
+                                                                    <strong>📅 Booking Date :</strong>
 
-                                                <strong>No. of Persons :</strong>
+                                                                    <?php echo $row['booking_date']; ?>
 
-                                                <?php echo $row['no_of_persons']; ?>
+                                                                </p>
 
-                                            </p>
+                                                                <p>
 
-                                            <p>
+                                                                    <strong>✈ Travel Date :</strong>
 
-                                                <strong>Total Amount :</strong>
+                                                                    <?php echo $row['travel_date']; ?>
 
-                                                ₹ <?php echo $row['total_amount']; ?>
+                                                                </p>
 
-                                            </p>
+                                                                <p>
 
-                                            <p>
+                                                                    <strong>👥 Persons :</strong>
 
-                                                <strong>Status :</strong>
+                                                                    <?php echo $row['no_of_persons']; ?>
 
-                                                <?php
+                                                                </p>
 
-                                                if ($row['status'] == "active") {
-                                                    echo "<span class='badge bg-success'>Confirmed</span>";
-                                                } elseif ($row['status'] == "pending") {
-                                                    echo "<span class='badge bg-warning text-dark'>Pending</span>";
-                                                } elseif ($row['status'] == "completed") {
-                                                    echo "<span class='badge bg-primary'>Completed</span>";
-                                                } else {
-                                                    echo "<span class='badge bg-danger'>Cancelled</span>";
+                                                            </div>
+
+                                                            <div class="col-md-6">
+
+                                                                <p>
+
+                                                                    <strong>💰 Total Amount :</strong>
+
+                                                                    ₹ <?php echo $row['total_amount']; ?>
+
+                                                                </p>
+
+                                                                <p>
+
+                                                                    <strong>Status :</strong>
+
+                                                                    <?php
+
+                                                                    if ($row['status'] == "active") {
+                                                                        echo '<span class="badge bg-success">Confirmed</span>';
+                                                                    } elseif ($row['status'] == "pending") {
+                                                                        echo '<span class="badge bg-warning text-dark">Pending</span>';
+                                                                    } elseif ($row['status'] == "completed") {
+                                                                        echo '<span class="badge bg-primary">Completed</span>';
+                                                                    } else {
+                                                                        echo '<span class="badge bg-danger">Cancelled</span>';
+                                                                    }
+
+                                                                    ?>
+
+                                                                </p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <hr>
+
+                                                        <div class="d-flex flex-wrap gap-2 mt-3">
+
+                                                            <a href="booking_details.php?id=<?php echo $row['ID']; ?>"
+                                                                class="btn btn-primary">
+
+                                                                View Details
+
+                                                            </a>
+
+                                                            <?php if ($row['status'] == "pending") { ?>
+
+                                                                <a href="cancel_booking.php?id=<?php echo $row['ID']; ?>"
+                                                                    class="btn btn-danger"
+                                                                    onclick="return confirm('Are you sure you want to cancel this booking?')">
+
+                                                                    Cancel Booking
+
+                                                                </a>
+
+                                                            <?php } ?>
+
+                                                            <?php if ($row['status'] == "completed") { ?>
+
+                                                                <a href="add_review.php?id=<?php echo $row['package_id']; ?>"
+                                                                    class="btn btn-success">
+
+                                                                    Add Review
+
+                                                                </a>
+
+                                                            <?php } ?>
+
+                                                        </div>
+
+                                                    <?php
+
                                                 }
 
-                                                ?>
+                                                    ?>
 
-                                            </p>
+                                                    </div>
 
-                                            <div class="mt-3">
-
-                                                <a href="booking_details.php?id=<?php echo $row['ID']; ?>"
-                                                    class="btn btn-primary btn-sm">
-
-                                                    View Details
-
-                                                </a>
-
-                                                <?php
-
-                                                if ($row['status'] == "completed") {
-
-                                                ?>
-
-                                                    <a href="addreviews.php?id=<?php echo $row['package_id']; ?>"
-                                                        class="btn btn-success btn-sm">
-
-                                                        Add Review
-
-                                                    </a>
-
-                                                <?php
-
-                                                }
-
-                                                ?>
-
-                                                <?php
-
-                                                if ($row['status'] == "pending") {
-
-                                                ?>
-
-                                                    <a href="cancel_booking.php?id=<?php echo $row['ID']; ?>"
-                                                        class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Cancel this booking?')">
-
-                                                        Cancel Booking
-
-                                                    </a>
-
-                                                <?php
-
-                                                }
-
-                                                ?>
+                                                </div>
 
                                             </div>
 
                                         </div>
 
-                                    </div>
+                                    <?php
 
-                                </div>
+                                } else {
+
+                                    ?>
+
+                                        <div class="alert alert-info text-center">
+
+                                            <h4>No Bookings Yet</h4>
+
+                                            <p>Looks like you haven't booked any travel package.</p>
+
+                                            <a href="packages.php"
+                                                class="btn btn-primary">
+
+                                                Explore Packages
+
+                                            </a>
+
+                                        </div>
+
+                                    <?php
+
+                                }
+
+                                    ?>
 
                             </div>
 
-                        <?php
+                        </div>
 
-                        }
-                    } else {
+                    </div>
 
-                        ?>
+                </div>
 
-                        <div class="alert alert-info text-center">
+                <!-- Reviews -->
 
-                            <h4>No Bookings Found</h4>
+                <div class="tab-pane fade"
+                    id="reviews">
 
-                            <p>You haven't booked any package yet.</p>
+                    <div class="card shadow border-0 rounded-4">
 
-                            <a href="tour_packages.php" class="btn btn-primary">
+                        <div class="card-header bg-warning">
 
-                                Explore Packages
+                            <h4 class="mb-0">
 
-                            </a>
+                                My Reviews
+
+                            </h4>
 
                         </div>
 
-                    <?php
+                        <div class="card-body">
 
-                    }
+                            <div class="alert alert-info">
 
-                    ?>
+                                <?php
+
+                                if (mysqli_num_rows($reviewResult) > 0) {
+
+                                    while ($row = mysqli_fetch_assoc($reviewResult)) {
+
+                                ?>
+
+                                        <div class="card mb-3 shadow-sm border-0">
+
+                                            <div class="card-body">
+
+                                                <h5 class="fw-bold">
+
+                                                    <?php echo $row['package_name']; ?>
+
+                                                </h5>
+
+                                                <p>
+
+                                                    <strong>Rating :</strong>
+
+                                                    <?php
+
+                                                    for ($i = 1; $i <= $row['rating']; $i++) {
+                                                        echo "⭐";
+                                                    }
+
+                                                    ?>
+
+                                                </p>
+
+                                                <p>
+
+                                                    <strong>Review :</strong>
+
+                                                    <?php echo $row['review']; ?>
+
+                                                </p>
+
+                                                <small class="text-muted">
+
+                                                    <?php echo $row['created_at']; ?>
+
+                                                </small>
+
+                                            </div>
+
+                                        </div>
+
+                                    <?php
+
+                                    }
+                                } else {
+
+                                    ?>
+
+                                    <div class="alert alert-info">
+
+                                        No Reviews Yet.
+
+                                    </div>
+
+                                <?php
+
+                                }
+
+                                ?>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Enquiries -->
+
+                <div class="tab-pane fade"
+                    id="enquiries">
+
+                    <div class="card shadow border-0 rounded-4">
+
+                        <div class="card-header bg-dark text-white">
+
+                            <h4 class="mb-0">
+
+                                My Enquiries
+
+                            </h4>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="alert alert-info">
+
+                                <?php
+
+                                if (mysqli_num_rows($enquiryResult) > 0) {
+
+                                    while ($row = mysqli_fetch_assoc($enquiryResult)) {
+
+                                ?>
+
+                                        <div class="card mb-3 shadow-sm border-0">
+
+                                            <div class="card-body">
+
+                                                <h5>
+
+                                                    <?php echo $row['subject']; ?>
+
+                                                </h5>
+
+                                                <p>
+
+                                                    <?php echo $row['message']; ?>
+
+                                                </p>
+
+                                                <p>
+
+                                                    <strong>Status :</strong>
+
+                                                    <?php
+
+                                                    if ($row['status'] == "pending") {
+                                                        echo "<span class='badge bg-warning'>Pending</span>";
+                                                    } elseif ($row['status'] == "replied") {
+                                                        echo "<span class='badge bg-success'>Replied</span>";
+                                                    } else {
+                                                        echo "<span class='badge bg-secondary'>" . $row['status'] . "</span>";
+                                                    }
+
+                                                    ?>
+
+                                                </p>
+
+                                                <small class="text-muted">
+
+                                                    <?php echo $row['created_at']; ?>
+
+                                                </small>
+
+                                            </div>
+
+                                        </div>
+
+                                    <?php
+
+                                    }
+                                } else {
+
+                                    ?>
+
+                                    <div class="alert alert-info">
+
+                                        No Enquiries Found.
+
+                                    </div>
+
+                                <?php
+
+                                }
+
+                                ?>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
