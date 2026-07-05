@@ -52,7 +52,7 @@ if (!isset($_SESSION["email"])) {
 	<nav class="site-nav">
 		<div class="container">
 			<div class="site-navigation">
-				<a href="index.html" class="logo m-0">Euphoria Travels<span class="text-primary">.</span></a>
+				<a href="index.html" class="logo m-0">𝑬𝒖𝒑𝒉𝒐𝒓𝒊𝒂 𝑻𝒓𝒂𝒗𝒆𝒍𝒔<span class="text-primary"></span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="./admin_dashboard.php">Dashboarde</a></li>
@@ -80,7 +80,6 @@ if (!isset($_SESSION["email"])) {
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="./manage_bookings.php">Manage Bookings</a>
-							<a class="dropdown-item" href="./edit_bookings.php">Edit Bookings</a>
 						</div>
 					</li>
 				</ul>

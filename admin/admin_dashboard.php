@@ -130,6 +130,68 @@ $rejected = mysqli_num_rows(mysqli_query($db, "SELECT * FROM bookings WHERE stat
     </div>
 
 </div>
+<!-- Recent Bookings -->
+
+<div class="card shadow mt-4">
+
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Recent Bookings</h4>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-light">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Client Name</th>
+                    <th>Email</th>
+                    <th>Booking Date</th>
+                    <th>Travel Date</th>
+                    <th>No of persons</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <?php
+
+                $query = mysqli_query($db, "SELECT * FROM bookings ORDER BY ID DESC LIMIT 10");
+
+                while ($row = mysqli_fetch_assoc($query)) {
+                ?>
+
+                    <tr>
+
+                        <td><?php echo $row['ID']; ?></td>
+
+                        <td><?php echo $row['booking_date']; ?></td>
+
+                        <td><?php echo $row['travel_date']; ?></td>
+
+                        <td><?php echo $row['no_of_persons']; ?></td>
+
+                        <td>₹<?php echo $row['total_amount']; ?></td>
+
+                        <td><?php echo $row['status']; ?></td>
+                    </tr>
+
+                <?php
+                }
+                ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 <?php
 

@@ -43,12 +43,21 @@ if (isset($_POST['update_status'])) {
           </script>";
 }
 ?>
+<div class="hero hero-inner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="intro-wrap">
+                    <h1 class="mb-0">Manage Bookings</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="container mt-5">
+<div class="container mt-5 ml-0 mr-0">
 
-    <h2 class="text-center mb-4">Manage Bookings</h2>
-
-    <table class="table table-bordered table-hover text-center">
+    <table class="table table-bordered table-hover text-center" style="width:122%;">
 
         <thead class="table-dark">
             <tr>
@@ -75,7 +84,7 @@ if (isset($_POST['update_status'])) {
 
                     <td><?php echo $row['F_name'] . " " . $row['L_name']; ?></td>
                     <td>
-                        <img src="../package_image/<?php echo $row['image']; ?>" width="100">
+                        <img src="../package_image/<?php echo $row['image']; ?>" width="200">
                     </td>
 
                     <td><?php echo $row['package_name']; ?></td>

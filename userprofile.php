@@ -52,6 +52,54 @@ ORDER BY reviewa.ID DESC";
 $reviewResult = mysqli_query($db, $reviewQuery);
 
 
+// add review
+
+if (isset($_POST['submit_review'])) {
+
+    $user_id = $_POST['user_id'];
+
+    $package_id = $_POST['package_id'];
+
+    $rating = $_POST['rating'];
+
+    $review = mysqli_real_escape_string($db, $_POST['review']);
+
+    $check = mysqli_query($db, "
+SELECT *
+FROM reviewa
+WHERE user_id='$user_id'
+AND package_id='$package_id'
+");
+
+    if (mysqli_num_rows($check) > 0) {
+
+        echo "<script>alert('You have already reviewed this package');</script>";
+    } else {
+
+        mysqli_query($db, "
+INSERT INTO reviewa
+(user_id,package_id,rating,review,status)
+
+VALUES
+
+('$user_id',
+'$package_id',
+'$rating',
+'$review',
+'active')
+");
+
+        echo "<script>
+
+alert('Review Submitted Successfully');
+
+window.location='userprofile.php';
+
+</script>";
+    }
+}
+
+
 // enquiry query
 $enquiryQuery = "SELECT *
 
@@ -370,6 +418,97 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
                                                                     Add Review
 
                                                                 </button>
+                                                                <div class="modal fade"
+                                                                    id="reviewModal<?php echo $row['ID']; ?>">
+
+                                                                    <div class="modal-dialog">
+
+                                                                        <div class="modal-content">
+
+                                                                            <div class="modal-header bg-success text-white">
+
+                                                                                <h5 class="modal-title">
+
+                                                                                    ⭐ Add Review
+
+                                                                                </h5>
+
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="close"
+                                                                                    data-dismiss="modal">
+
+                                                                                    &times;
+
+                                                                                </button>
+
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+
+                                                                                <form method="POST">
+
+                                                                                    <input
+                                                                                        type="hidden"
+                                                                                        name="package_id"
+                                                                                        value="<?php echo $row['package_id']; ?>">
+
+                                                                                    <input
+                                                                                        type="hidden"
+                                                                                        name="user_id"
+                                                                                        value="<?php echo $_SESSION['user_id']; ?>">
+
+                                                                                    <div class="form-group">
+
+                                                                                        <label>Rating</label>
+
+                                                                                        <select
+                                                                                            name="rating"
+                                                                                            class="form-control"
+                                                                                            required>
+
+                                                                                            <option value="">Select Rating</option>
+
+                                                                                            <option value="5">⭐⭐⭐⭐⭐</option>
+                                                                                            <option value="4">⭐⭐⭐⭐</option>
+                                                                                            <option value="3">⭐⭐⭐</option>
+                                                                                            <option value="2">⭐⭐</option>
+                                                                                            <option value="1">⭐</option>
+
+                                                                                        </select>
+
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+
+                                                                                        <label>Review</label>
+
+                                                                                        <textarea
+                                                                                            name="review"
+                                                                                            class="form-control"
+                                                                                            rows="5"
+                                                                                            required></textarea>
+
+                                                                                    </div>
+
+                                                                                    <button
+                                                                                        type="submit"
+                                                                                        name="submit_review"
+                                                                                        class="btn btn-success w-100">
+
+                                                                                        Submit Review
+
+                                                                                    </button>
+
+                                                                                </form>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
 
                                                             <?php } ?>
 
