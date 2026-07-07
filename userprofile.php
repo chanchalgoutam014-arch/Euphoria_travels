@@ -64,8 +64,7 @@ if (isset($_POST['submit_review'])) {
 
     $review = mysqli_real_escape_string($db, $_POST['review']);
 
-    $check = mysqli_query($db, "
-SELECT *
+    $check = mysqli_query($db, "SELECT *
 FROM reviewa
 WHERE user_id='$user_id'
 AND package_id='$package_id'
@@ -379,7 +378,7 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
                                                                     } elseif ($row['status'] == "pending") {
                                                                         echo '<span class="badge bg-warning text-dark">Pending</span>';
                                                                     } elseif ($row['status'] == "completed") {
-                                                                        echo '<span class="badge bg-primary">Completed</span>';
+                                                                        echo '<span class="badge bg-light text-dark">Completed</span>';
                                                                     } else {
                                                                         echo '<span class="badge bg-danger">Cancelled</span>';
                                                                     }
@@ -540,7 +539,7 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
 
                                             <p>Looks like you haven't booked any travel package.</p>
 
-                                            <a href="packages.php"
+                                            <a href="tour_packages.php"
                                                 class="btn btn-primary">
 
                                                 Explore Packages

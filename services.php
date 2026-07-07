@@ -1,6 +1,7 @@
 <?php
 
 include("header.php");
+include("config.php");
 
 ?>
 <div class="position-relative" style="height:500px; overflow:hidden;">
@@ -27,50 +28,38 @@ include("header.php");
 <div class="untree_co-section">
   <div class="container">
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-3">
-        <div class="media-1">
-          <a href="#" class="d-block mb-3"><img src="images/hero-slider-1.jpg" alt="Image" class="img-fluid"></a>
-          <div class="d-flex">
-            <div>
-              <h3><a href="#">Excellence in Travel</a></h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-md-6 col-lg-3">
-        <div class="media-1">
-          <a href="#" class="d-block mb-3"><img src="images/hero-slider-2.jpg" alt="Image" class="img-fluid"></a>
-          <div class="d-flex">
-            <div>
-              <h3><a href="#">Discovering Best</a></h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-md-6 col-lg-3">
-        <div class="media-1">
-          <a href="#" class="d-block mb-3"><img src="images/hero-slider-3.jpg" alt="Image" class="img-fluid"></a>
-          <div class="d-flex">
-            <div>
-              <h3><a href="#">A New Moments of Life</a></h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-md-6 col-lg-3">
-        <div class="media-1">
-          <a href="#" class="d-block mb-3"><img src="images/hero-slider-4.jpg" alt="Image" class="img-fluid"></a>
-          <div class="d-flex">
-            <div>
-              <h3><a href="#">Joy To Your Journey</a></h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <?php
+			$query = mysqli_query($db, "SELECT * FROM tour_package ORDER BY ID DESC LIMIT 4");
+
+			while ($row = mysqli_fetch_assoc($query)) {
+			?>
+
+				<div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+					<div class="media-1">
+
+						<a href="tour_packages.php?id=<?php echo $row['ID']; ?>" class="d-block mb-3">
+							<img src="package_image/<?php echo $row['image']; ?>"
+								alt="<?php echo $row['package_name']; ?>"
+								class="img-fluid"
+								style="height:250px; width:300px; object-fit:cover;">
+						</a>
+
+						<div class="d-flex align-items-center">
+							<div>
+								<h3>
+									<a href="tour_packages.php?id=<?php echo $row['ID']; ?>">
+										<?php echo $row['package_name']; ?>
+									</a>
+								</h3>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			<?php
+			}
+			?>
     </div>
   </div>
 </div>
