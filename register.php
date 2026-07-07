@@ -18,7 +18,7 @@ if (isset($_POST["register_btn"])) {
 
     if ($result) {
 
-        echo ("added successfully");
+        echo "<script>window.location.assign('index.php?msg=login sucessfully')</script>";
     } else {
 
         echo ("not added");

@@ -90,6 +90,13 @@ if (!isset($_SESSION["email"])) {
 							<a class="dropdown-item" href="./manage_enquiry.php">Manage Enquiries</a>
 						</div>
 					</li>
+					<?php
+					if (isset($_SESSION["email"])) {
+						echo "<li class='active'><a href='../index.php'>Logout</a></li>";
+					} else {
+						echo "<li class='active'><a href='adminLogin.php'>Admin Login</a></li>";
+					}
+					?>
 				</ul>
 
 				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
