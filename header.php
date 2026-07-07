@@ -20,6 +20,7 @@ session_start();
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/jquery.fancybox.min.css">
@@ -47,7 +48,7 @@ session_start();
 	<nav class="site-nav">
 		<div class="container">
 			<div class="site-navigation">
-				<a href="index.php" class="logo m-0" style="font-size: 25px;">𝑬𝒖𝒑𝒉𝒐𝒓𝒊𝒂 𝑻𝒓𝒂𝒗𝒆𝒍𝒔<span class="text-primary"></span></a>
+				<a href="index.php" class="logo m-0" style="font-size: 25px;"><img src="./images/passport.png" alt="icon" style="height: 36px;"></i>𝑬𝒖𝒑𝒉𝒐𝒓𝒊𝒂 𝑻𝒓𝒂𝒗𝒆𝒍𝒔<span class="text-primary"></span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="index.php">Home</a></li>

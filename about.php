@@ -1,7 +1,14 @@
 <?php
 
 include("header.php");
+include("config.php");
 
+$query = mysqli_query($db, "SELECT reviewa.*, user.F_name, user.L_name
+FROM reviewa
+INNER JOIN user ON reviewa.user_id = user.id
+ORDER BY reviewa.ID DESC");
+
+$query1 = mysqli_query($db, "SELECT image FROM destinations ORDER BY ID DESC LIMIT 6");
 ?>
 
 <div class="position-relative" style="height:500px; overflow:hidden;">
@@ -27,104 +34,78 @@ include("header.php");
 <div class="untree_co-section">
   <div class="container">
     <div class="row">
-      <div class="col-lg-7">
+      <div class="col-lg-10 mx-auto">
         <div class="owl-single dots-absolute owl-carousel">
-          <img src="images/slider-1.jpg" alt="Free HTML Template by Untree.co" class="img-fluid rounded-20">
-          <img src="images/slider-2.jpg" alt="Free HTML Template by Untree.co" class="img-fluid rounded-20">
-          <img src="images/slider-3.jpg" alt="Free HTML Template by Untree.co" class="img-fluid rounded-20">
-          <img src="images/slider-4.jpg" alt="Free HTML Template by Untree.co" class="img-fluid rounded-20">
-          <img src="images/slider-5.jpg" alt="Free HTML Template by Untree.co" class="img-fluid rounded-20">
+         <?php while($row = mysqli_fetch_assoc($query1)) { ?>
+
+        <img src="./destination_image/<?php echo $row['image']; ?>"
+             class="img-fluid rounded-4"
+             style="height:600px; width:100%; object-fit:cover;">
+
+    <?php } ?>
         </div>
-      </div>
-      <div class="col-lg-5 pl-lg-5 ml-auto">
-        <h2 class="section-title mb-4">About Tours</h2>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-        <ul class="list-unstyled two-col clearfix">
-          <li>Outdoor recreation activities</li>
-          <li>Airlines</li>
-          <li>Car Rentals</li>
-          <li>Cruise Lines</li>
-          <li>Hotels</li>
-          <li>Railways</li>
-          <li>Travel Insurance</li>
-          <li>Package Tours</li>
-          <li>Insurance</li>
-          <li>Guide Books</li>
-        </ul>
       </div>
     </div>
   </div>
 </div>
-<div class="container">
-  <?php
+<div class="container py-5">
+  <div class="row g-4">
 
-  if (mysqli_num_rows($reviewResult) > 0) {
+    <?php while ($row = mysqli_fetch_assoc($query)) { ?>
 
-    while ($row = mysqli_fetch_assoc($reviewResult)) {
+      <div class="col-lg-4 col-md-6">
 
-  ?>
+        <div class="card h-100 shadow border-0"
+          style="border-radius:15px; transition:.3s;">
 
-      <div class="card mb-3 shadow-sm border-0">
+          <div class="card-body text-center">
 
-        <div class="card-body">
+            <!-- User Icon -->
+            <div style="width:70px;height:70px;background:#0d6efd;color:#fff;
+                    border-radius:50%;display:flex;align-items:center;
+                    justify-content:center;font-size:28px;margin:auto;">
+              <i class="fas fa-user"></i>
+            </div>
 
-          <h5 class="fw-bold">
+            <h5 class="mt-3 mb-1">
+              <?php echo htmlspecialchars($row['F_name'] . ' ' . $row['L_name']); ?>
+            </h5>
 
-            <?php echo $row['package_name']; ?>
+            <!-- Rating -->
+            <div class="mb-3">
 
-          </h5>
+              <?php
+              for ($i = 1; $i <= 5; $i++) {
+                if ($i <= $row['rating'])
+                  echo '<i class="fas fa-star text-warning"></i>';
+                else
+                  echo '<i class="far fa-star text-warning"></i>';
+              }
+              ?>
 
-          <p>
+            </div>
 
-            <strong>Rating :</strong>
+            <p class="text-muted fst-italic">
+              "<?php echo htmlspecialchars($row['review']); ?>"
+            </p>
 
-            <?php
+          </div>
 
-            for ($i = 1; $i <= $row['rating']; $i++) {
-              echo "⭐";
-            }
-
-            ?>
-
-          </p>
-
-          <p>
-
-            <strong>Review :</strong>
-
-            <?php echo $row['review']; ?>
-
-          </p>
-
-          <small class="text-muted">
-
-            <?php echo $row['created_at']; ?>
-
-          </small>
+          <div class="card-footer bg-white text-center border-0">
+            <small class="text-secondary">
+              <?php echo date("d M Y", strtotime($row['created_at'])); ?>
+            </small>
+          </div>
 
         </div>
 
       </div>
-    <?php
 
-    }
-  } else {
+    <?php } ?>
 
-    ?>
-
-    <div class="alert alert-info">
-
-      No Reviews Yet.
-
-    </div>
-
-  <?php
-
-  }
-
-  ?>
-
+  </div>
 </div>
+
 <div class="untree_co-section">
   <div class="container">
     <div class="row justify-content-between align-items-center">
