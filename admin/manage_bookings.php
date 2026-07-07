@@ -107,15 +107,27 @@ if (isset($_POST['update_status'])) {
                                 name="booking_id"
                                 value="<?php echo $row['ID']; ?>">
 
-                            <select name="status"
-                                class="form-control form-control-sm mr-2"
-                                style="width:140px;">
+                            <select name="status" class="form-control form-control-sm mr-2" style="width:140px;">
 
-                                <option value="pending">Pending</option>
-                                <option value="paid">Paid</option>
-                                <option value="confirmed">Confirmed</option>
-                                <option value="completed">Completed</option>
-                                <option value="rejected">Rejected</option>
+                                <option value="<?php echo $row['status']; ?>" selected>
+                                    <?php echo ucfirst($row['status']); ?>
+                                </option>
+
+                                <?php
+                                if ($row['status'] == 'pending') {
+                                    echo '<option value="paid">Paid</option>';
+                                    echo '<option value="confirmed">Confirmed</option>';
+                                    echo '<option value="rejected">Rejected</option>';
+                                } elseif ($row['status'] == 'paid') {
+                                    echo '<option value="confirmed">Confirmed</option>';
+                                    echo '<option value="rejected">Rejected</option>';
+                                } elseif ($row['status'] == 'confirmed') {
+                                    echo '<option value="completed">Completed</option>';
+                                }
+                                elseif ($row['status'] == 'cancelled') {
+                                    echo '<option value="completed">Completed</option>';
+                                }
+                                ?>
 
                             </select>
 

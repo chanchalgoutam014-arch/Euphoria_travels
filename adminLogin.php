@@ -22,10 +22,9 @@ if (isset($_POST["login_btn"])) {
     
     } else {
 
-        echo "<script>window.location.assign('login.php?msg=login unsucessfully')</script>";
+        echo "<script>window.location.assign('adminLogin.php?msg=login unsucessfully')</script>";
     }
 }
-
 ?>
 
 <div class="hero hero-inner">

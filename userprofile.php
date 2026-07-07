@@ -18,16 +18,17 @@ $user = mysqli_fetch_assoc($userResult);
 
 // Booking Details
 $bookingQuery = "SELECT
-bookings.*,
-tour_package.package_name,
-tour_package.image
+    bookings.*,
+    tour_package.package_name,
+    tour_package.image
 
 FROM bookings
 
 INNER JOIN tour_package
-ON bookings.package_id=tour_package.ID
+ON bookings.package_id = tour_package.ID
 
-WHERE bookings.user_id='$user_id'
+WHERE bookings.user_id = '$user_id'
+AND bookings.status NOT IN ('cancelled','rejected')
 
 ORDER BY bookings.ID DESC";
 
@@ -75,17 +76,10 @@ AND package_id='$package_id'
         echo "<script>alert('You have already reviewed this package');</script>";
     } else {
 
-        mysqli_query($db, "
-INSERT INTO reviewa
+        mysqli_query($db, "INSERT INTO reviewa
 (user_id,package_id,rating,review,status)
 
-VALUES
-
-('$user_id',
-'$package_id',
-'$rating',
-'$review',
-'active')
+VALUES('$user_id','$package_id','$rating','$review','$status')
 ");
 
         echo "<script>
@@ -278,246 +272,120 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
 
                 <!-- Bookings -->
 
-                <div class="tab-pane fade"
-                    id="bookings">
+                <div class="tab-pane fade" id="bookings">
 
                     <div class="card shadow border-0 rounded-4">
 
                         <div class="card-header bg-success text-white">
-
-                            <h4 class="mb-0">
-
-                                My Bookings
-
-                            </h4>
-
+                            <h4 class="mb-0">My Bookings</h4>
                         </div>
 
                         <div class="card-body">
 
-                            <div class="alert alert-info">
+                            <?php
+                            if (mysqli_num_rows($bookingResult) > 0) {
+                                while ($row = mysqli_fetch_assoc($bookingResult)) {
+                            ?>
 
-                                <?php
+                                    <div class="card shadow border-0 rounded-4 mb-4">
 
-                                if (mysqli_num_rows($bookingResult) > 0) {
+                                        <div class="row g-0">
 
-                                    while ($row = mysqli_fetch_assoc($bookingResult)) {
+                                            <!-- Image -->
+                                            <div class="col-md-3">
+                                                <img src="package_image/<?php echo $row['image']; ?>"
+                                                    class="img-fluid w-100 h-100 rounded-start"
+                                                    style="object-fit:cover; min-height:220px;">
+                                            </div>
 
-                                ?>
+                                            <!-- Details -->
+                                            <div class="col-md-9">
 
-                                        <div class="card shadow border-0 rounded-4 mb-4">
+                                                <div class="card-body">
 
-                                            <div class="row g-0">
+                                                    <h2 class="fw-bold mb-4 text-success">
+                                                        <?php echo $row['package_name']; ?>
+                                                    </h2>
 
-                                                <div class="col-md-4">
+                                                    <div class="row">
 
-                                                    <img src="package_image/<?php echo $row['image']; ?>"
-                                                        class="img-fluid rounded-start"
-                                                        style="height:250px;width:100%;object-fit:cover;">
+                                                        <div class="col-md-6">
 
-                                                </div>
+                                                            <p>
+                                                                <strong>📅 Booking Date :</strong>
+                                                                <?php echo $row['booking_date']; ?>
+                                                            </p>
 
-                                                <div class="col-md-8">
+                                                            <p>
+                                                                <strong>✈ Travel Date :</strong>
+                                                                <?php echo $row['travel_date']; ?>
+                                                            </p>
 
-                                                    <div class="card-body">
-
-                                                        <h3 class="fw-bold mb-3">
-
-                                                            <?php echo $row['package_name']; ?>
-
-                                                        </h3>
-
-                                                        <div class="row">
-
-                                                            <div class="col-md-6">
-
-                                                                <p>
-
-                                                                    <strong>📅 Booking Date :</strong>
-
-                                                                    <?php echo $row['booking_date']; ?>
-
-                                                                </p>
-
-                                                                <p>
-
-                                                                    <strong>✈ Travel Date :</strong>
-
-                                                                    <?php echo $row['travel_date']; ?>
-
-                                                                </p>
-
-                                                                <p>
-
-                                                                    <strong>👥 Persons :</strong>
-
-                                                                    <?php echo $row['no_of_persons']; ?>
-
-                                                                </p>
-
-                                                            </div>
-
-                                                            <div class="col-md-6">
-
-                                                                <p>
-
-                                                                    <strong>💰 Total Amount :</strong>
-
-                                                                    ₹ <?php echo $row['total_amount']; ?>
-
-                                                                </p>
-
-                                                                <p>
-
-                                                                    <strong>Status :</strong>
-
-                                                                    <?php
-
-                                                                    if ($row['status'] == "active") {
-                                                                        echo '<span class="badge bg-success">Confirmed</span>';
-                                                                    } elseif ($row['status'] == "pending") {
-                                                                        echo '<span class="badge bg-warning text-dark">Pending</span>';
-                                                                    } elseif ($row['status'] == "completed") {
-                                                                        echo '<span class="badge bg-light text-dark">Completed</span>';
-                                                                    } else {
-                                                                        echo '<span class="badge bg-danger">Cancelled</span>';
-                                                                    }
-
-                                                                    ?>
-
-                                                                </p>
-
-                                                            </div>
+                                                            <p>
+                                                                <strong>👥 Persons :</strong>
+                                                                <?php echo $row['no_of_persons']; ?>
+                                                            </p>
 
                                                         </div>
 
-                                                        <hr>
+                                                        <div class="col-md-6">
 
-                                                        <div class="d-flex flex-wrap gap-2 mt-3">
+                                                            <p>
+                                                                <strong>💰 Total Amount :</strong>
+                                                                ₹ <?php echo $row['total_amount']; ?>
+                                                            </p>
 
-                                                            <?php if ($row['status'] == "pending") { ?>
+                                                            <p>
+                                                                <strong>Status :</strong>
 
-                                                                <a href="cancel_booking.php?id=<?php echo $row['ID']; ?>"
-                                                                    class="btn btn-danger"
-                                                                    onclick="return confirm('Are you sure you want to cancel this booking?')">
+                                                                <?php
+                                                                if ($row['status'] == "confirmed") {
+                                                                    echo '<span class="badge bg-success">Confirmed</span>';
+                                                                } elseif ($row['status'] == "pending") {
+                                                                    echo '<span class="badge bg-warning text-dark">Pending</span>';
+                                                                } elseif ($row['status'] == "active") {
+                                                                    echo '<span class="badge bg-warning text-dark">Pending</span>';
+                                                                }
+                                                                elseif ($row['status'] == "rejected") {
+                                                                    echo '<span class="badge bg-danger">Rejected</span>';
+                                                                } elseif ($row['status'] == "paid") {
+                                                                    echo '<span class="badge bg-info text-dark">Paid</span>';
+                                                                }
+                                                                ?>
 
-                                                                    Cancel Booking
-
-                                                                </a>
-
-                                                            <?php } ?>
-
-                                                            <?php if ($row['status'] == "completed") { ?>
-
-                                                                <button
-                                                                    class="btn btn-success btn-sm"
-                                                                    data-toggle="modal"
-                                                                    data-target="#reviewModal<?php echo $row['ID']; ?>">
-
-                                                                    Add Review
-
-                                                                </button>
-                                                                <div class="modal fade"
-                                                                    id="reviewModal<?php echo $row['ID']; ?>">
-
-                                                                    <div class="modal-dialog">
-
-                                                                        <div class="modal-content">
-
-                                                                            <div class="modal-header bg-success text-white">
-
-                                                                                <h5 class="modal-title">
-
-                                                                                    ⭐ Add Review
-
-                                                                                </h5>
-
-                                                                                <button
-                                                                                    type="button"
-                                                                                    class="close"
-                                                                                    data-dismiss="modal">
-
-                                                                                    &times;
-
-                                                                                </button>
-
-                                                                            </div>
-
-                                                                            <div class="modal-body">
-
-                                                                                <form method="POST">
-
-                                                                                    <input
-                                                                                        type="hidden"
-                                                                                        name="package_id"
-                                                                                        value="<?php echo $row['package_id']; ?>">
-
-                                                                                    <input
-                                                                                        type="hidden"
-                                                                                        name="user_id"
-                                                                                        value="<?php echo $_SESSION['user_id']; ?>">
-
-                                                                                    <div class="form-group">
-
-                                                                                        <label>Rating</label>
-
-                                                                                        <select
-                                                                                            name="rating"
-                                                                                            class="form-control"
-                                                                                            required>
-
-                                                                                            <option value="">Select Rating</option>
-
-                                                                                            <option value="5">⭐⭐⭐⭐⭐</option>
-                                                                                            <option value="4">⭐⭐⭐⭐</option>
-                                                                                            <option value="3">⭐⭐⭐</option>
-                                                                                            <option value="2">⭐⭐</option>
-                                                                                            <option value="1">⭐</option>
-
-                                                                                        </select>
-
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-
-                                                                                        <label>Review</label>
-
-                                                                                        <textarea
-                                                                                            name="review"
-                                                                                            class="form-control"
-                                                                                            rows="5"
-                                                                                            required></textarea>
-
-                                                                                    </div>
-
-                                                                                    <button
-                                                                                        type="submit"
-                                                                                        name="submit_review"
-                                                                                        class="btn btn-success w-100">
-
-                                                                                        Submit Review
-
-                                                                                    </button>
-
-                                                                                </form>
-
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            <?php } ?>
+                                                            </p>
 
                                                         </div>
 
-                                                    <?php
+                                                    </div>
 
-                                                }
+                                                    <hr>
 
-                                                    ?>
+                                                    <div class="d-flex gap-2 flex-wrap">
+
+                                                    <?php if ($row['status'] != "confirmed") { ?>
+                                                        <a href="cancel_booking.php?id=<?php echo $row['ID']; ?>"
+                                                            class="btn btn-danger"
+                                                            onclick="return confirm('Are you sure you want to cancel this booking?')">
+
+                                                            Cancel Booking
+
+                                                        </a>
+
+                                                     <?php } ?>
+
+                                                        <?php if ($row['status'] == "confirmed") { ?>
+
+                                                            <button
+                                                                class="btn btn-success"
+                                                                data-toggle="modal"
+                                                                data-target="#reviewModal<?php echo $row['ID']; ?>">
+
+                                                                ⭐ Add Review
+
+                                                            </button>
+
+                                                        <?php } ?>
 
                                                     </div>
 
@@ -527,34 +395,124 @@ $enquiryResult = mysqli_query($db, $enquiryQuery);
 
                                         </div>
 
-                                    <?php
+                                    </div>
 
-                                } else {
+                                    <!-- Review Modal -->
 
-                                    ?>
+                                    <?php if ($row['status'] == "confirmed") { ?>
 
-                                        <div class="alert alert-info text-center">
+                                        <div class="modal fade"
+                                            id="reviewModal<?php echo $row['ID']; ?>">
 
-                                            <h4>No Bookings Yet</h4>
+                                            <div class="modal-dialog">
 
-                                            <p>Looks like you haven't booked any travel package.</p>
+                                                <div class="modal-content">
 
-                                            <a href="tour_packages.php"
-                                                class="btn btn-primary">
+                                                    <div class="modal-header bg-success text-white">
 
-                                                Explore Packages
+                                                        <h5 class="modal-title">
+                                                            Add Review
+                                                        </h5>
 
-                                            </a>
+                                                        <button
+                                                            type="button"
+                                                            class="close"
+                                                            data-dismiss="modal">
+
+                                                            &times;
+
+                                                        </button>
+
+                                                    </div>
+
+                                                    <div class="modal-body">
+
+                                                        <form method="POST">
+
+                                                            <input
+                                                                type="hidden"
+                                                                name="package_id"
+                                                                value="<?php echo $row['package_id']; ?>">
+
+                                                            <input
+                                                                type="hidden"
+                                                                name="user_id"
+                                                                value="<?php echo $_SESSION['user_id']; ?>">
+
+                                                            <div class="form-group">
+
+                                                                <label>Rating</label>
+
+                                                                <select
+                                                                    name="rating"
+                                                                    class="form-control"
+                                                                    required>
+
+                                                                    <option value="">Select Rating</option>
+                                                                    <option value="5">⭐⭐⭐⭐⭐</option>
+                                                                    <option value="4">⭐⭐⭐⭐</option>
+                                                                    <option value="3">⭐⭐⭐</option>
+                                                                    <option value="2">⭐⭐</option>
+                                                                    <option value="1">⭐</option>
+
+                                                                </select>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+
+                                                                <label>Review</label>
+
+                                                                <textarea
+                                                                    name="review"
+                                                                    class="form-control"
+                                                                    rows="5"
+                                                                    required></textarea>
+
+                                                            </div>
+
+                                                            <button
+                                                                type="submit"
+                                                                name="submit_review"
+                                                                class="btn btn-success w-100">
+
+                                                                Submit Review
+
+                                                            </button>
+
+                                                        </form>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
 
                                         </div>
 
-                                    <?php
+                                    <?php } ?>
 
+                                <?php
                                 }
+                            } else {
+                                ?>
 
-                                    ?>
+                                <div class="alert alert-info text-center">
 
-                            </div>
+                                    <h4>No Bookings Yet</h4>
+
+                                    <p>Looks like you haven't booked any travel package.</p>
+
+                                    <a href="tour_packages.php"
+                                        class="btn btn-primary">
+
+                                        Explore Packages
+
+                                    </a>
+
+                                </div>
+
+                            <?php } ?>
 
                         </div>
 

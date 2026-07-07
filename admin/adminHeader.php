@@ -52,10 +52,10 @@ if (!isset($_SESSION["email"])) {
 	<nav class="site-nav">
 		<div class="container">
 			<div class="site-navigation">
-				<a href="index.html" class="logo m-0"><i class="bi bi-airplane-fill"></i>𝑬𝒖𝒑𝒉𝒐𝒓𝒊𝒂 𝑻𝒓𝒂𝒗𝒆𝒍𝒔<span class="text-primary"></span></a>
+				<a href="index.html" class="logo m-0"><img src="../images/passport.png" alt="icon" style="height: 36px;"></i>𝑬𝒖𝒑𝒉𝒐𝒓𝒊𝒂 𝑻𝒓𝒂𝒗𝒆𝒍𝒔<span class="text-primary"></span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-					<li class="active"><a href="./admin_dashboard.php">Dashboarde</a></li>
+					<li class="active"><a href="./admin_dashboard.php">Dashboard</a></li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Destination
@@ -92,7 +92,7 @@ if (!isset($_SESSION["email"])) {
 					</li>
 					<?php
 					if (isset($_SESSION["email"])) {
-						echo "<li class='active'><a href='../index.php'>Logout</a></li>";
+						echo "<li class='active'><a href='../adminLogout.php'>Logout</a></li>";
 					} else {
 						echo "<li class='active'><a href='adminLogin.php'>Admin Login</a></li>";
 					}
