@@ -54,7 +54,7 @@ $package_result = mysqli_query($db, $package_query);
                         <h5><?php echo $package['package_name']; ?></h5>
 
                         <p>
-                            <?php echo substr($package['description'], 0, 100); ?>...
+                            <?php echo substr($package['description'], 0, 500); ?>...
                         </p>
 
                         <p>

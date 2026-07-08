@@ -23,7 +23,7 @@ if (isset($_POST["register_btn"])) {
 
         echo ("not added");
     }
-}
+} 
 
 ?>
 

@@ -57,7 +57,7 @@ if (isset($_POST['update_status'])) {
 
 <div class="container mt-5 ml-0 mr-0">
 
-    <table class="table table-bordered table-hover text-center" style="width:122%;">
+    <table class="table table-bordered table-hover text-center" style="width:134%;">
 
         <thead class="table-dark">
             <tr>
