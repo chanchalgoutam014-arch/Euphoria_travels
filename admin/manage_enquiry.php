@@ -51,7 +51,7 @@ if (isset($_POST['send_reply'])) {
             <th>Message</th>
             <th>Reply</th>
             <th>Status</th>
-            <th>Action</th>
+            <th colspan="2">Action</th>
         </tr>
 
         <?php
@@ -92,7 +92,9 @@ if (isset($_POST['send_reply'])) {
                     <a href="reply_enquiry.php?id=<?php echo $row['ID']; ?>" class="btn btn-success btn-sm">
                         Reply
                     </a>
+                </td>
 
+                <td>
                     <a href="delete_enquiry.php?id=<?php echo $row['ID']; ?>"
                         class="btn btn-danger btn-sm"
                         onclick="return confirm('Delete this enquiry?')">
