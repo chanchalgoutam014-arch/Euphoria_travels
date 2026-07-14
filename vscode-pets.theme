@@ -1,0 +1,66 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "VS Code Pets",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0B1220",
+    "editor.foreground": "#E6E1CF",
+    "editorCursor.foreground": "#FFB86C",
+    "editor.lineHighlightBackground": "#1D2640",
+    "editor.selectionBackground": "#3E506E",
+    "editor.inactiveSelectionBackground": "#2E3B56",
+    "editorWhitespace.foreground": "#4F5B78",
+    "sideBar.background": "#101828",
+    "sideBar.foreground": "#C8D1E0",
+    "activityBar.background": "#111A30",
+    "statusBar.background": "#151F36",
+    "statusBar.foreground": "#D8DEE9",
+    "titleBar.activeBackground": "#111A30",
+    "titleBar.activeForeground": "#E6E1CF"
+  },
+  "tokenColors": [
+    {
+      "scope": ["comment", "punctuation.definition.comment"],
+      "settings": {
+        "foreground": "#7C8CAA",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": ["string"],
+      "settings": {
+        "foreground": "#A3E6A6"
+      }
+    },
+    {
+      "scope": ["constant.numeric", "constant.language.boolean"],
+      "settings": {
+        "foreground": "#F8C46A"
+      }
+    },
+    {
+      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "settings": {
+        "foreground": "#FF92C7"
+      }
+    },
+    {
+      "scope": ["variable", "variable.parameter"],
+      "settings": {
+        "foreground": "#D6C7FF"
+      }
+    },
+    {
+      "scope": ["entity.name.function", "support.function"],
+      "settings": {
+        "foreground": "#8BE9FD"
+      }
+    },
+    {
+      "scope": ["entity.name.type", "support.class"],
+      "settings": {
+        "foreground": "#FFB86C"
+      }
+    }
+  ]
+}
