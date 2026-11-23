@@ -46,9 +46,9 @@ session_start();
 	</div>
 
 	<nav class="site-nav">
-		<div class="container">
+		<div class="container" style="max-width: 1390px;">
 			<div class="site-navigation">
-				<a href="index.php" class="logo m-0" style="font-size: 25px;"><img src="./images/passport.png" alt="icon" style="height: 36px;"></i>𝑬𝒖𝒑𝒉𝒐𝒓𝒊𝒂 𝑻𝒓𝒂𝒗𝒆𝒍𝒔<span class="text-primary"></span></a>
+				<a href="index.php" class="logo m-0" style="font-size: 30px;"><img src="./images/passport.png" alt="icon" style="height: 36px;"></i>𝑬𝒖𝒑𝒉𝒐𝒓𝒊𝒂 𝑻𝒓𝒂𝒗𝒆𝒍𝒔<span class="text-primary"></span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="index.php">Home</a></li>
